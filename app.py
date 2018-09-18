@@ -1,17 +1,26 @@
 import re
 import sys
-from pyspark import SparkConf, SparkContext
-from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
-from pyspark.sql.types import IntegerType
-from  pyspark.ml.feature import Imputer
-from pyspark.ml.feature import HashingTF, IDF, Tokenizer, StringIndexer
-from pyspark.ml.classification import LogisticRegression, DecisionTreeClassifier, NaiveBayes
-from pyspark.ml import Pipeline
-from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-from pyspark.ml.linalg import Vectors
-from pyspark.ml.feature import VectorAssembler
+import glob
+import glob
+# from pyspark import SparkConf, SparkContext
+# from pyspark.sql import SparkSession
+# from pyspark.sql import functions as F
+# from pyspark.sql.types import IntegerType
+# from pyspark.ml.feature import Imputer
+# from pyspark.ml.feature import HashingTF, IDF, Tokenizer, StringIndexer
+# from pyspark.ml.classification import LogisticRegression, DecisionTreeClassifier, NaiveBayes
+# from pyspark.ml import Pipeline
+# from pyspark.ml.evaluation import MulticlassClassificationEvaluator
+# from pyspark.ml.linalg import Vectors
+# from pyspark.ml.feature import VectorAssembler
 
+#Method used to grab all of the NFL Draft Data and clean lineman from it
+def getNFLDraftData():
+    csvFilesPath = []
+    for x in glob.glob("./NflDraftData/*.csv"):
+        csvFilesPath.append(x)
+    
+    print(csvFiles)
 
 
 def getCollegeFootballStats(year):
