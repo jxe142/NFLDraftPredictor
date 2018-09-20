@@ -1,5 +1,4 @@
-﻿,,,,,,,Misc,,,Approx Val,,,Passing,,,,,Rushing,,,Receiving,,,,,,,
-Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,TD,Rec,Yds,TD,Tkl,Int,Sk,College/Univ,Year
+﻿Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,TD,Rec,Yds,TD,Tkl,Int,Sk,College/Univ,Year
 1,1,CLE,Baker Mayfield,QB,23,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Oklahoma,2018
 1,2,NYG,Saquon Barkley,RB,21,2018,0,0,1,0,0,2,0,0,0,0,0,29,134,1,16,102,0,,,,Penn St.,2018
 1,3,NYJ,Sam Darnold,QB,21,2018,0,0,1,0,0,2,41,62,532,3,3,8,0,0,0,0,0,,,,USC,2018
@@ -7,7 +6,7 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 1,5,DEN,Bradley Chubb,DE,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,3,,0.5,North Carolina St.,2018
 1,6,IND,Quenton Nelson,G,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Notre Dame,2018
 1,7,BUF,Josh Allen,QB,22,2018,0,0,1,0,0,2,24,48,319,1,2,12,58,0,0,0,0,,,,Wyoming,2018
-1,8,CHI,Roquan Smith,ILB,21,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,,1,Georgia,2018
+1,8,CHI,Roquan Smith,ILB,21,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,8,,1,Georgia,2018
 1,9,SFO,Mike McGlinchey,T,24,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Notre Dame,2018
 1,10,ARI,Josh Rosen,QB,21,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,UCLA,2018
 1,11,MIA,Minkah Fitzpatrick,S,21,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,5,,,Alabama,2018
@@ -26,7 +25,7 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 1,24,CAR,D.J. Moore,WR,21,2018,0,0,0,0,0,2,0,0,0,0,0,2,10,0,1,51,1,,,,Maryland,2018
 1,25,BAL,Hayden Hurst,TE,25,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,South Carolina,2018
 1,26,ATL,Calvin Ridley,WR,23,2018,0,0,0,0,0,2,0,0,0,0,0,1,3,0,4,64,1,,,,Alabama,2018
-1,27,SEA,Rashaad Penny,RB,22,2018,0,0,0,0,0,1,0,0,0,0,0,7,8,0,4,35,0,,,,San Diego St.,2018
+1,27,SEA,Rashaad Penny,RB,22,2018,0,0,0,0,0,2,0,0,0,0,0,17,38,0,4,35,0,,,,San Diego St.,2018
 1,28,PIT,Terrell Edmunds,S,21,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,3,,,Virginia Tech,2018
 1,29,JAX,Taven Bryan,DT,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Florida,2018
 1,30,MIN,Mike Hughes,CB,21,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,4,1,,Central Florida,2018
@@ -38,7 +37,7 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 2,36,IND,Darius Leonard,LB,23,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,21,,1,South Carolina St.,2018
 2,37,IND,Braden Smith,G,22,2018,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Auburn,2018
 2,38,TAM,Ronald Jones,RB,21,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,USC,2018
-2,39,CHI,James Daniels,C,20,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Iowa,2018
+2,39,CHI,James Daniels,C,20,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Iowa,2018
 2,40,DEN,Courtland Sutton,WR,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,3,54,0,,,,SMU,2018
 2,41,TEN,Harold Landry,OLB,22,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Boston Col.,2018
 2,42,MIA,Mike Gesicki,TE,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,1,11,0,,,,Penn St.,2018
@@ -50,7 +49,7 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 2,48,LAC,Uchenna Nwosu,OLB,21,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,,1,USC,2018
 2,49,PHI,Dallas Goedert,TE,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,4,0,,,,South Dakota St.,2018
 2,50,DAL,Connor Williams,T,21,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Texas,2018
-2,51,CHI,Anthony Miller,WR,23,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,2,14,0,,,,Memphis,2018
+2,51,CHI,Anthony Miller,WR,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,4,25,1,,,,Memphis,2018
 2,52,IND,Kemoko Turay,OLB,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,2,,,Rutgers,2018
 2,53,TAM,M.J. Stewart,CB,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,8,,,North Carolina,2018
 2,54,CIN,Jessie Bates,S,21,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,11,1,,Wake Forest,2018
@@ -78,7 +77,7 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 3,76,PIT,Mason Rudolph,QB,23,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Oklahoma St.,2018
 3,77,CIN,Sam Hubbard,DE,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,3,,1,Ohio St.,2018
 3,78,CIN,Malik Jefferson,OLB,21,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Texas,2018
-3,79,SEA,Rasheem Green,DT,21,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,,,USC,2018
+3,79,SEA,Rasheem Green,DT,21,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,3,,,USC,2018
 3,80,HOU,Martinas Rankin,T,23,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Mississippi St.,2018
 3,81,DAL,Michael Gallup,WR,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,2,14,0,,,,Colorado St.,2018
 3,82,DET,Tracy Walker,S,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Louisiana,2018
@@ -110,16 +109,16 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 4,108,NYG,Kyle Lauletta,QB,23,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Richmond,2018
 4,109,WAS,Troy Apke,S,23,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Penn St.,2018
 4,110,OAK,Nick Nelson,CB,21,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Wisconsin,2018
-4,111,LAR,Brian Allen,C,22,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Michigan St.,2018
+4,111,LAR,Brian Allen,C,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Michigan St.,2018
 4,112,CIN,Mark Walton,RB,21,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Miami (FL),2018
 4,113,DEN,DaeSean Hamilton,WR,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Penn St.,2018
 4,114,DET,Da'Shawn Hand,DE,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,7,,,Alabama,2018
-4,115,CHI,Joel Iyiegbuniwe,LB,22,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,West. Kentucky,2018
+4,115,CHI,Joel Iyiegbuniwe,LB,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,West. Kentucky,2018
 4,116,DAL,Dorance Armstrong,DE,21,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Kansas,2018
 4,117,TAM,Jordan Whitehead,S,21,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,4,,,Pittsburgh,2018
 4,118,BAL,Anthony Averett,CB,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,1,,,Alabama,2018
 4,119,LAC,Kyzir White,S,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,7,1,,West Virginia,2018
-4,120,SEA,Will Dissly,TE,22,2018,0,0,1,0,0,1,0,0,0,0,0,0,0,0,3,105,1,,,,Washington,2018
+4,120,SEA,Will Dissly,TE,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,6,147,2,,,,Washington,2018
 4,121,BUF,Taron Johnson,CB,22,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,2,,,Weber St.,2018
 4,122,BAL,Kenny Young,LB,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,8,,1,UCLA,2018
 4,123,MIA,Durham Smythe,TE,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Notre Dame,2018
@@ -140,15 +139,15 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 5,138,GNB,Cole Madison,G,23,,0,0,0,,,,,,,,,,,,,,,,,,Washington St.,2018
 5,139,NYG,R.J. McIntosh,DT,22,,0,0,0,,,,,,,,,,,,,,,,,,Miami (FL),2018
 5,140,OAK,Maurice Hurst,DT,23,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,4,,1,Michigan,2018
-5,141,SEA,Shaquem Griffin,OLB,23,2018,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,3,,,Central Florida,2018
+5,141,SEA,Shaquem Griffin,OLB,23,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,3,,,Central Florida,2018
 5,142,SFO,D.J. Reed,CB,21,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Kansas St.,2018
 5,143,NWE,Ja'Whaun Bentley,ILB,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,5,,,Purdue,2018
 5,144,TAM,Justin Watson,WR,23,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Pennsylvania,2018
-5,145,CHI,Bilal Nichols,DT,21,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Delaware,2018
+5,145,CHI,Bilal Nichols,DT,21,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,,,Delaware,2018
 5,146,SEA,Tre Flowers,S,23,2018,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,7,,,Oklahoma St.,2018
 5,147,LAR,Micah Kiser,ILB,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Virginia,2018
 5,148,PIT,Marcus Allen,S,22,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Penn St.,2018
-5,149,SEA,Michael Dickson,P,22,2018,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Texas,2018
+5,149,SEA,Michael Dickson,P,22,2018,0,0,1,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Texas,2018
 5,150,CLE,Genard Avery,LB,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,4,,1,Memphis,2018
 5,151,CIN,Davontae Harris,CB,23,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Illinois St.,2018
 5,152,TEN,Dane Cruikshank,CB,23,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,1,66,1,,,,Arizona,2018
@@ -185,7 +184,7 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 6,183,DEN,Sam Jones,G,22,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Arizona St.,2018
 6,184,SFO,Marcell Harris,S,24,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Florida,2018
 6,185,IND,Deon Cain,WR,22,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Clemson,2018
-6,186,SEA,Jacob Martin,LB,22,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,Temple,2018
+6,186,SEA,Jacob Martin,LB,22,2018,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,,,,Temple,2018
 6,187,BUF,Ray-Ray McCloud,WR,21,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Clemson,2018
 6,188,CLE,Simeon Thomas,CB,24,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Louisiana,2018
 6,189,NOR,Kamrin Moore,CB,21,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Boston Col.,2018
@@ -256,3 +255,4 @@ Rnd,Pick,Tm,Player,Pos,Age,To,AP1,PB,St,CarAV,DrAV,G,Cmp,Att,Yds,TD,Int,Att,Yds,
 7,254,ARI,Korey Cunningham,T,23,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,Cincinnati,2018
 7,255,BUF,Austin Proehl,WR,22,2018,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,,,,North Carolina,2018
 7,256,WAS,Trey Quinn,WR,22,2018,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,,,,SMU,2018
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
