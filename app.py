@@ -83,9 +83,9 @@ def ScrapeCollegeStats(years,dataTypes):
                         elif (infoType == "Receiving"):
                             ReceivingPlayers.append(text)
 
-    print("Rushing Years : \n".join(RushingPlayers))
-    print("Passing Years : \n".join(PassingPlayers))
-    print("Receiving Years : \n".join(ReceivingPlayers))
+    print("\n".join(RushingPlayers))
+    print("\n".join(PassingPlayers))
+    print(" \n".join(ReceivingPlayers))
     totalPlayers = len(RushingPlayers) + len(PassingPlayers)  + len(ReceivingPlayers)
     print("Total " + str(totalPlayers))
 
