@@ -1,4 +1,5 @@
 import re
+import os
 import sys
 import csv
 import urllib.request as request, urllib.error as error
@@ -165,7 +166,6 @@ def ScrapeNflDraftData(years):
             for row in tableBody :
                 data = cleanRow(row,year)
                 if(data != ""):
-                    print(data)
                     data = data.replace(",College Stats", "") # cleans the data form something we scrapped 
                     Players.append(data)
 
@@ -239,3 +239,32 @@ def ScrapeCombineData(years,dataTypes):
     # numberOFNodes = len(OffensePlayers)  + len(DefensePlayers) + len(SpecailPlayers)
     # print("Total "+ str(numberOFNodes))
     return (OffensePlayers,DefensePlayers,SpecailPlayers)
+
+def getData():
+    path0 = os.path.abspath("./data/CollegeStatsData/") 
+    path1 = os.path.abspath("./data/NflDraftData/") 
+    path2 = os.path.abspath("./data/CombineData/") 
+
+    if len(os.listdir(path0)) < 3:
+        print("####### Scrapping College Data #######")
+        years = getYears(2017,2018) # Max range 1956 - 2018 Note add one extra year to end
+        dataTypes = ['Rushing', 'Passing', 'Receiving']
+        RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
+        writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
+        writeCSV("./data/CollegeStatsData/ReceivingData.csv", ReceivingPlayersCollege) 
+        writeCSV("./data/CollegeStatsData/PassingData.csv", PassingPlayersCollege) 
+
+    if len(os.listdir(path1)) < 2 :    
+        print("####### Scrapping NFL Data #######")
+        years = getYears(2017,2018) # Max range 1937 - 2018
+        NFLPlayers = ScrapeNflDraftData(years)
+        writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
+    
+    if len(os.listdir(path2)) < 3 :
+        print("####### Scrapping Combine Data #######")
+        years = getYears(2017,2018) # Max range 2000 - 2018
+        dataTypes = ['Offense', 'Defense', 'Special'] 
+        OffensePlayers, DefensePlayers, SpecailPlayers = ScrapeCombineData(years,["Offense","Defense", "Special"]) 
+        writeCSV("./data/CombineData/OffensePlayersData.csv", OffensePlayers) 
+        writeCSV("./data/CombineData/DefensePlayersData.csv", DefensePlayers) 
+        writeCSV("./data/CombineData/SpecailPlayersData.csv", SpecailPlayers) 

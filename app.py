@@ -1,37 +1,17 @@
 import re
 import sys
 import glob
+import os
 import urllib.request as request, urllib.error as error
 from bs4 import BeautifulSoup
-from scrape import ScrapeCollegeStats, ScrapeNflDraftData, ScrapeCombineData, getYears, writeCSV
+from scrape import ScrapeCollegeStats, ScrapeNflDraftData, ScrapeCombineData, getYears, writeCSV, getData
 # from pyspark import SparkConf, SparkContext
 # from pyspark.sql import SparkSession
 # from pyspark.sql import functions as F
 # from pyspark.sql.types import IntegerType
 
 def main():
-    print("####### Scrapping College Data #######")
-    years = getYears(2017,2018) # Max range 1956 - 2018 Note add one extra year to end
-    dataTypes = ['Rushing', 'Passing', 'Receiving']
-    # RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
-    # writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
-    # writeCSV("./data/CollegeStatsData/ReceivingData.csv", ReceivingPlayersCollege) 
-    # writeCSV("./data/CollegeStatsData/PassingData.csv", PassingPlayersCollege) 
-
-    print("####### Scrapping NFL Data #######")
-    years = getYears(2017,2018) # Max range 1937 - 2018
-    # NFLPlayers = ScrapeNflDraftData(years)
-    # writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
-
-
-    print("####### Scrapping Combine Data #######")
-    years = getYears(2017,2018) # Max range 2000 - 2018
-    dataTypes = ['Offense', 'Defense', 'Special'] 
-    OffensePlayers, DefensePlayers, SpecailPlayers = ScrapeCombineData(years,["Offense","Defense", "Special"]) 
-    writeCSV("./data/CombineData/OffensePlayersData.csv", OffensePlayers) 
-    writeCSV("./data/CombineData/DefensePlayersData.csv", DefensePlayers) 
-    writeCSV("./data/CombineData/SpecailPlayersData.csv", SpecailPlayers) 
-
+    getData()
 
 main()
 
