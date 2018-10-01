@@ -1,9 +1,8 @@
 import re
 import sys
+import glob
 import urllib.request as request, urllib.error as error
 from bs4 import BeautifulSoup
-import glob
-import glob
 from scrape import ScrapeCollegeStats, ScrapeNflDraftData, ScrapeCombineData, getYears
 # from pyspark import SparkConf, SparkContext
 # from pyspark.sql import SparkSession
