@@ -6,8 +6,8 @@ from bs4 import BeautifulSoup
 
 
 '''
-    TODO: * Need to clean data  that is missing notes and fill them in with blanks 0's or nulls
-          * Write a csv converter that takes in list and writes as CSV
+    TODO: [X] Need to clean data  that is missing notes and fill them in with nulls
+          [ ] Write a csv converter that takes in list and writes as CSV
 '''
 
 
@@ -17,6 +17,24 @@ def getYears(start,end):
     for x in range(start,end):
         years.append(str(x))
     return years
+
+def cleanRow(row,year):
+    text = ""
+    test = row.getText(",")
+    if(test[0].isdigit()): # Makes the lines we need each row in the table
+        for td in row:
+            data = td.getText()
+            if(data == ""):
+                data = "null,"
+                text += data
+            else:
+                data += ","
+                text += data
+        text += year
+        text = text.replace(",*,", ",") # cleans the data form something we scrapped 
+        text = text.replace("*,", ",") # cleans the data form something we scrapped 
+    return text
+
 
 def writeCSV(fileName,dataList):
     pass
@@ -49,7 +67,6 @@ def ScrapeCollegeStats(years,dataTypes):
     rushingTableStruct +=  "Avg (receiving), TD (receiving), Plays (scrimmage), Yds (scrimmage), Avg (scrimmage), TD (scrimmage), Year"
 
     print(rushingTableStruct)
-    #exit()
 
     for year in years:
         print("Getting College data for " + year + ":")
@@ -84,18 +101,16 @@ def ScrapeCollegeStats(years,dataTypes):
                 tableBody = table.find('tbody').select("tr")
 
                 for row in tableBody :
-                    text = row.getText(",")
-                    if(text[0].isdigit()): # Makes sure we don't get any table headers in the data
-                        text += "," + year
-                        text = text.replace(",*,", ",") # cleans the data form something we scrapped 
+                    data = cleanRow(row,year)
+                    if(data != ""):
                         if (infoType == "Rushing"):
-                            RushingPlayers.append(text)
+                            RushingPlayers.append(data)
                         elif (infoType == "Passing"):
-                            PassingPlayers.append(text)
+                            PassingPlayers.append(data)
                         elif (infoType == "Receiving"):
-                            ReceivingPlayers.append(text)
+                            ReceivingPlayers.append(data)
 
-    print("\n".join(RushingPlayers))
+    #print("\n".join(RushingPlayers))
     # print("\n".join(PassingPlayers))
     # print(" \n".join(ReceivingPlayers))
     # totalPlayers = len(RushingPlayers) + len(PassingPlayers)  + len(ReceivingPlayers)
@@ -135,13 +150,13 @@ def ScrapeNflDraftData(years):
             tableBody = table.find('tbody').select("tr")
 
             for row in tableBody :
-                text = row.getText(",")
-                if(text[0].isdigit()): # Makes sure we don't get any table headers in the data
-                    text += "," + year
-                    text = text.replace(",College Stats", "") # cleans the data form something we scrapped 
-                    Players.append(text)
+                data = cleanRow(row,year)
+                if(data != ""):
+                    print(data)
+                    data = data.replace(",College Stats", "") # cleans the data form something we scrapped 
+                    Players.append(data)
 
-    # print("\n".join(Players))
+    #print("\n".join(Players))
     # print("Number of drafted Players " + str(len(Players)))
     return Players
 
@@ -191,14 +206,14 @@ def ScrapeCombineData(years,dataTypes):
                 tableBody = table.find('tbody').select("tr")
 
                 for row in tableBody :
-                    text = row.getText(",")
-                    if(text[0].isdigit()): # Makes sure we don't get any table headers in the data
+                    data = cleanRow(row,year)
+                    if(data != ""):
                         if (infoType == "Offense"):
-                            OffensePlayers.append(text)
+                            OffensePlayers.append(data)
                         elif (infoType == "Defense"):
-                            DefensePlayers.append(text)
+                            DefensePlayers.append(data)
                         elif (infoType == "Special"):
-                            SpecailPlayers.append(text)
+                            SpecailPlayers.append(data)
 
     # print("\n".join(OffensePlayers))
     # print("\n".join(DefensePlayers))
