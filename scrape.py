@@ -10,8 +10,6 @@ from bs4 import BeautifulSoup
           [ ] Write a csv converter that takes in list and writes as CSV
 '''
 
-
-
 def getYears(start,end):
     years = []
     for x in range(start,end):
@@ -37,16 +35,20 @@ def cleanRow(row,year):
 
 
 def writeCSV(fileName,dataList):
-    pass
+    print("Writting file " + fileName)
+    with open(fileName,'wb') as file:
+        for line in dataList:
+            file.write(line.encode())
+            file.write('\n'.encode())
 
 ################################################ METHODS FOR The College STATS DATA ################################################
 '''
     * We have about 40,364  nodes in the college data in total 
     * Pulls in the collage data for Passing, Rushing and Receiving 
-    * The years are from 1956 until 2017 TODO may have to drop some years to align with NFL data
+    * The years are from 1956 until 2017 
     
     * Table structure Passing :
-    Rnk | Player Name | School | Conf | Games Played | Cmp (passing) | Att (passing) | Percent (passing) | Yards (passing) | Avg Yards (passing) | 
+    Rnk | Player Name | School | Conf | Games Played | Cmp (passing) | Att (passing) | Percent (passing) | Yards (passing) | Avg Yards (passing) | AY/A |
     TD (passing) | Interceptins (passing) | Rate (passing) | Att (rushing) | Yds (rushing) | Avg Yards (rushing) | TD (rushing) | Year |
     
     * Table structure Rushing :
@@ -63,10 +65,17 @@ def ScrapeCollegeStats(years,dataTypes):
     PassingPlayers = [] # Holds the data for the QB's
     ReceivingPlayers = [] # Holds the data for Recviers 
 
+    passingTableStrcut = " Rnk, Player Name, School, Conf, Games Played, Cmp (passing), Att (passing),  Percent (passing),  Yards (passing),  Avg Yards (passing),AY/A (passing)"
+    passingTableStrcut += ",TD (passing), Interceptins (passing), Rate (passing), Att (rushing), Yds (rushing), Avg Yards (rushing), TD (rushing), Year"
+    PassingPlayers.append(passingTableStrcut)
+    
     rushingTableStruct = "Rnk, Player, School, Conf, Games Played, Att (rushing), Yds (rushing), Avg (rushing), TD (rushing), Rec (receiving), Yds (receiving),"
     rushingTableStruct +=  "Avg (receiving), TD (receiving), Plays (scrimmage), Yds (scrimmage), Avg (scrimmage), TD (scrimmage), Year"
+    RushingPlayers.append(rushingTableStruct)
 
-    print(rushingTableStruct)
+    receivingTableStrcut = " Rnk, Player, School, Conf, Games Played, Rec (receiving), Yds (receiving), Avg (receiving), TD (receiving),  Att (rushing), Yds (rushing),"
+    receivingTableStrcut += "Avg (rushing), TD (rushing), Plays (scrimmage), Yds (scrimmage), Avg (scrimmage), TD (scrimmage), Year "
+    ReceivingPlayers.append(receivingTableStrcut)
 
     for year in years:
         print("Getting College data for " + year + ":")
@@ -124,13 +133,17 @@ def ScrapeCollegeStats(years,dataTypes):
     * The years are from 1937 until 2017
     
     * Table structure Passing :
-    Rnd | Pick | Team | Player Name | Pos | Age | To (year they play to) | AP1 | PB | ST | CarAV | DrAV | G | Cmp (passing) | Att (passing) | Tds (passing) |
+    Rnd | Pick | Team | Player Name | Pos | Age | To (year they play to) | AP1 | PB | ST | CarAV | DrAV | G | Cmp (passing) | Att (passing) | Yds (passing) | Tds (passing) |
     Int (passing) | Att (rushing) | Yds (rushing) | TD (rushing) | Rec (receiving) | Yds (receiving) | TD (receiving) | Tkl | Int | Sk | College | Draft Year
 
 '''
 
 def ScrapeNflDraftData(years):
     Players = []
+
+    tableStruct = "Rnd, Pick, Team, Player Name, Pos, Age, To (year they play to), AP1, PB, ST, CarAV, DrAV, G, Cmp (passing), Att (passing), Yds (passing), Tds (passing),"
+    tableStruct += "Int (passing), Att (rushing), Yds (rushing), TD (rushing), Rec (receiving), Yds (receiving), TD (receiving), Tkl, Int, Sk, College, Draft Year"
+    Players.append(tableStruct)
 
     for year in years:
         print("Getting NFL data for " + year + ":")
@@ -168,7 +181,7 @@ def ScrapeNflDraftData(years):
     * The years are from 2000 until 2017
     
     * Table structure Passing :
-    Rk | Year | Player | Pos | AV | School | College | Height | Wt | 40yd | Vertical | BenchReps | Broad Jump | 3Cone | Shuttle | Drafted (Tm / Rd/ Yr) |
+    Rk | Year | Player | Pos | AV | School | College | Height | Wt | 40yd | Vertical | BenchReps | Broad Jump | 3Cone | Shuttle | Drafted (Tm / Rd/ Yr) | Year
 
 '''
 
@@ -176,6 +189,11 @@ def ScrapeCombineData(years,dataTypes):
     OffensePlayers = [] # Holds the data for Offense
     DefensePlayers = [] # Holds the data for Defense
     SpecailPlayers = [] # Holds the data for Special Teams  
+
+    tableStruct = "Rk, Year, Player, Pos, AV, School, College, Height, Wt, 40yd, Vertical, BenchReps, Broad Jump, 3Cone, Shuttle, Drafted (Tm / Rd/ Yr), Year"
+    OffensePlayers.append(tableStruct)
+    DefensePlayers.append(tableStruct)
+    SpecailPlayers.append(tableStruct)
 
     for year in years:
         print("Getting Combine data for " + year + ":")
