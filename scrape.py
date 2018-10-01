@@ -247,7 +247,7 @@ def getData():
 
     if len(os.listdir(path0)) < 3:
         print("####### Scrapping College Data #######")
-        years = getYears(2017,2018) # Max range 1956 - 2018 Note add one extra year to end
+        years = getYears(1956,2018) # Max range 1956 - 2018 Note add one extra year to end
         dataTypes = ['Rushing', 'Passing', 'Receiving']
         RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
         writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
@@ -256,13 +256,13 @@ def getData():
 
     if len(os.listdir(path1)) < 2 :    
         print("####### Scrapping NFL Data #######")
-        years = getYears(2017,2018) # Max range 1937 - 2018
+        years = getYears(1937,2018) # Max range 1937 - 2018
         NFLPlayers = ScrapeNflDraftData(years)
         writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
     
     if len(os.listdir(path2)) < 3 :
         print("####### Scrapping Combine Data #######")
-        years = getYears(2017,2018) # Max range 2000 - 2018
+        years = getYears(2000,2018) # Max range 2000 - 2018
         dataTypes = ['Offense', 'Defense', 'Special'] 
         OffensePlayers, DefensePlayers, SpecailPlayers = ScrapeCombineData(years,["Offense","Defense", "Special"]) 
         writeCSV("./data/CombineData/OffensePlayersData.csv", OffensePlayers) 
