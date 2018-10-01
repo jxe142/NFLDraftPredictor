@@ -1,13 +1,25 @@
 import re
 import sys
+import csv
 import urllib.request as request, urllib.error as error
 from bs4 import BeautifulSoup
+
+
+'''
+    TODO: * Need to clean data  that is missing notes and fill them in with blanks 0's or nulls
+          * Write a csv converter that takes in list and writes as CSV
+'''
+
+
 
 def getYears(start,end):
     years = []
     for x in range(start,end):
         years.append(str(x))
     return years
+
+def writeCSV(fileName,dataList):
+    pass
 
 ################################################ METHODS FOR The College STATS DATA ################################################
 '''
@@ -32,6 +44,12 @@ def ScrapeCollegeStats(years,dataTypes):
     RushingPlayers = [] # Holds the data for the running backs
     PassingPlayers = [] # Holds the data for the QB's
     ReceivingPlayers = [] # Holds the data for Recviers 
+
+    rushingTableStruct = "Rnk, Player, School, Conf, Games Played, Att (rushing), Yds (rushing), Avg (rushing), TD (rushing), Rec (receiving), Yds (receiving),"
+    rushingTableStruct +=  "Avg (receiving), TD (receiving), Plays (scrimmage), Yds (scrimmage), Avg (scrimmage), TD (scrimmage), Year"
+
+    print(rushingTableStruct)
+    #exit()
 
     for year in years:
         print("Getting College data for " + year + ":")
@@ -77,7 +95,7 @@ def ScrapeCollegeStats(years,dataTypes):
                         elif (infoType == "Receiving"):
                             ReceivingPlayers.append(text)
 
-    # print("\n".join(RushingPlayers))
+    print("\n".join(RushingPlayers))
     # print("\n".join(PassingPlayers))
     # print(" \n".join(ReceivingPlayers))
     # totalPlayers = len(RushingPlayers) + len(PassingPlayers)  + len(ReceivingPlayers)
