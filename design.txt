@@ -1,0 +1,6 @@
+Design Decisions:
+    * This file is used to keep track of any design decisions or changes to the application 
+
+* Have to remove all lineman both D and O from all of the data
+* Need to Remove all of the Special teams players
+***** The reason of the above is b/c it is hard to guess where these positions land b/c we don't have statics to calculate them 
