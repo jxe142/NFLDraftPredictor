@@ -1,0 +1,133 @@
+Rk, Year, Player, Pos, AV, School, College, Height, Wt, 40yd, Vertical, BenchReps, Broad Jump, 3Cone, Shuttle, Drafted (Tm / Rd/ Yr), Year
+1,2000,Shane Lechler,P,69,Texas A&M,College Stats,6-2,234,null,null,null,null,null,null,Oakland Raiders / 5th / 142nd pick / 2000,2000
+2,2000,John Baker,P,4,North Texas,College Stats,6-3,227,null,null,null,null,null,null,null,2000
+3,2000,Jeff Walker,P,null,Mississippi State,null,5-10,218,null,null,null,null,null,null,null,2000
+4,2000,Andrew Bayes,P,null,East Carolina,null,6-2,200,null,null,null,null,null,null,null,2000
+5,2000,Deone Horinek,P,null,Colorado State,null,6-2,234,null,null,null,null,null,null,null,2000
+6,2000,Jimmy Kibble,P,null,Virginia Tech,null,5-10,195,null,null,null,null,null,null,null,2000
+1,2001,Kevin Stemke,P,1,Wisconsin,College Stats,6-2,187,null,null,null,null,null,null,null,2001
+2,2001,David Leaverton,P,null,Tennessee,College Stats,6-3,211,null,null,null,null,null,null,Jacksonville Jaguars / 5th / 142nd pick / 2001,2001
+3,2001,Nick Harris,P,23,California,College Stats,6-2,221,null,null,null,null,null,null,Denver Broncos / 4th / 120th pick / 2001,2001
+4,2001,Jason Baker,P,20,Iowa,College Stats,6-1,198,null,null,null,null,null,null,null,2001
+5,2001,Matt Allen,P,1,Troy,null,6-3,246,null,null,null,null,null,null,null,2001
+1,2002,Dave Zastudil,P,22,Ohio,College Stats,6-3,222,5.26,null,null,null,null,null,Baltimore Ravens / 4th / 112th pick / 2002,2002
+2,2002,Nick Murphy,P,1,Arizona State,College Stats,6-0,188,4.74,null,null,null,null,null,null,2002
+3,2002,Travis Dorsch,P,0,Purdue,College Stats,6-6,221,4.89,null,null,null,null,null,Cincinnati Bengals / 4th / 109th pick / 2002,2002
+4,2002,Adam Wulfeck,P,null,Cincinnati,College Stats,6-0,228,4.83,null,null,null,null,null,null,2002
+5,2002,Jeff Webb,P,null,Vanderbilt,null,6-3,215,null,null,null,null,null,null,null,2002
+6,2002,Casey Roussel,P,null,Tulsa,College Stats,6-1,219,5.20,null,null,null,null,null,null,2002
+7,2002,Mike Abrams,P,null,Virginia,College Stats,6-4,227,null,null,null,null,null,null,null,2002
+8,2002,Jeff Ferguson,P,null,Oklahoma,College Stats,5-10,201,4.80,null,null,null,null,null,null,2002
+1,2003,Mike Scifres,P,30,Western Illinois,null,6-2,236,4.91,null,null,null,null,null,San Diego Chargers / 5th / 149th pick / 2003,2003
+2,2003,Glenn Pakulak,P,1,Kentucky,College Stats,6-2,226,4.96,null,null,null,null,null,null,2003
+3,2003,Mat McBriar,P,22,Hawaii,College Stats,6-0,213,5.07,null,null,null,null,null,null,2003
+4,2003,Eddie Johnson,P,1,Idaho State,null,6-3,232,5.17,null,null,null,null,null,Minnesota Vikings / 6th / 180th pick / 2003,2003
+5,2003,Andy Groom,P,0,Ohio State,College Stats,6-0,196,4.63,null,null,null,null,null,null,2003
+6,2003,Fred Capshaw,P,null,Miami (FL),null,5-10,192,4.89,null,null,null,null,null,null,2003
+7,2003,Damon Duval,P,null,Auburn,College Stats,6-0,196,4.90,null,null,null,null,null,null,2003
+8,2003,Nate Fikse,P,null,UCLA,College Stats,5-8,196,4.91,null,null,null,null,null,null,2003
+9,2003,Joey Huber,P,null,Colorado State,College Stats,6-6,246,4.96,null,null,null,null,null,null,2003
+10,2003,Mark Mariscal,P,null,Colorado,College Stats,6-2,201,4.90,null,null,null,null,null,null,2003
+1,2004,B.J. Sander,P,1,Ohio State,College Stats,6-4,219,4.84,null,null,null,null,null,Green Bay Packers / 3rd / 87th pick / 2004,2004
+2,2004,Andy Lee,P,41,Pittsburgh,College Stats,6-1,207,5.00,null,null,null,null,null,San Francisco 49ers / 6th / 188th pick / 2004,2004
+3,2004,Kyle Larson,P,9,Nebraska,College Stats,6-1,204,4.86,null,null,null,null,null,null,2004
+4,2004,Donnie Jones,P,35,LSU,College Stats,6-3,222,4.88,null,null,null,null,null,Seattle Seahawks / 7th / 224th pick / 2004,2004
+1,2005,Reggie Hodges,P,5,Ball State,College Stats,6-0,226,4.88,null,null,null,null,null,St. Louis Rams / 6th / 210th pick / 2005,2005
+2,2005,Dustin Colquitt,P,30,Tennessee,College Stats,6-2,211,4.88,null,null,null,null,null,Kansas City Chiefs / 3rd / 99th pick / 2005,2005
+3,2005,Bryce Benekos,P,null,Texas-El Paso,College Stats,6-5,227,5.10,null,null,null,null,null,null,2005
+4,2005,Cole Farden,P,null,Oklahoma State,College Stats,5-10,205,4.94,null,null,null,null,null,null,2005
+5,2005,Adam Finley,P,null,Michigan,College Stats,6-4,221,null,null,null,null,null,null,null,2005
+1,2006,Steve Weatherford,P,20,Illinois,College Stats,6-2,217,4.82,null,null,null,null,null,null,2006
+2,2006,Boone Stutz,LS,1,Texas A&M,College Stats,6-6,259,5.06,null,null,null,null,null,null,2006
+3,2006,Ryan Plackemeier,P,5,Wake Forest,College Stats,6-3,253,5.20,null,null,null,null,null,Seattle Seahawks / 7th / 239th pick / 2006,2006
+4,2006,Sam Paulescu,P,1,Oregon State,College Stats,6-0,190,4.98,null,null,null,null,null,null,2006
+5,2006,John Torp,P,null,Colorado,College Stats,6-2,212,4.73,null,null,null,null,null,null,2006
+6,2006,Gavin Tarquinio,LS,null,Georgia Tech,College Stats,6-3,253,4.88,null,18,null,null,null,null,2006
+7,2006,Joel Stelly,P,null,Louisiana-Monroe,College Stats,5-10,197,4.68,null,null,null,null,null,null,2006
+8,2006,Danny Baugher,P,null,Arizona,College Stats,5-10,194,null,null,null,null,null,null,null,2006
+9,2006,David Lonie,P,null,California,College Stats,6-5,209,4.74,null,null,null,null,null,null,2006
+10,2006,Tom Malone,P,null,Southern California,College Stats,6-0,212,4.87,null,null,null,null,null,null,2006
+11,2006,Jeff Mullins,LS,null,Marshall,College Stats,6-2,247,5.03,null,21,null,null,null,null,2006
+12,2006,Thomas Olmsted,P,null,Troy,College Stats,6-4,214,5.18,null,null,null,null,null,null,2006
+1,2007,Daniel Sepulveda,P,7,Baylor,College Stats,6-3,229,4.62,null,null,null,null,null,Pittsburgh Steelers / 4th / 112th pick / 2007,2007
+2,2007,Jared Retkofsky,LS,1,TCU,College Stats,6-5,265,4.91,null,null,null,null,null,null,2007
+3,2007,Adam Podlesh,P,9,Maryland,College Stats,5-11,202,4.54,null,null,null,null,null,Jacksonville Jaguars / 4th / 101st pick / 2007,2007
+4,2007,Brandon Fields,P,24,Michigan State,College Stats,6-5,239,5.26,null,null,null,null,null,Miami Dolphins / 7th / 225th pick / 2007,2007
+5,2007,Nic Schmitt,P,null,Virginia Tech,College Stats,6-2,252,5.05,null,null,null,null,null,null,2007
+6,2007,Kody Bliss,P,null,Auburn,College Stats,5-10,179,5.08,null,null,null,null,null,null,2007
+7,2007,Brendan Carney,P,null,Syracuse,College Stats,6-4,203,5.03,null,null,null,null,null,null,2007
+8,2007,Adam Graessle,P,null,Pittsburgh,College Stats,6-4,215,4.84,null,null,null,null,null,null,2007
+9,2007,Aaron King,LS,null,Texas-El Paso,null,6-1,239,4.78,null,null,null,null,null,null,2007
+10,2007,Nick Leeson,LS,null,Virginia Tech,College Stats,6-1,255,5.08,null,null,null,null,null,null,2007
+11,2007,Alex Reyes,P,null,Texas Tech,College Stats,6-1,234,null,null,null,null,null,null,null,2007
+1,2008,Tyler Schmitt,LS,null,San Diego State,College Stats,6-2,231,4.93,29.0,21,118,7.03,4.33,Seattle Seahawks / 6th / 189th pick / 2008,2008
+2,2008,Durant Brooks,P,0,Georgia Tech,College Stats,6-0,204,5.20,null,null,null,null,null,Washington Redskins / 6th / 168th pick / 2008,2008
+3,2008,Owen Tolson,P,null,Army,College Stats,6-2,210,5.05,null,null,null,null,null,null,2008
+4,2008,Tim Bugg,LS,null,Indiana,null,6-0,257,5.12,null,17,null,null,null,null,2008
+5,2008,Mike Dragosavich,P,null,North Dakota State,null,6-5,212,4.85,null,null,null,null,null,null,2008
+6,2008,Andrew Larson,P,null,California,College Stats,6-0,202,4.94,null,null,null,null,null,null,2008
+7,2008,Tim Reyer,P,null,Kansas State,College Stats,5-11,205,5.05,null,null,null,null,null,null,2008
+1,2009,Thomas Morstead,P,26,Southern Methodist,College Stats,6-4,225,4.83,null,19,null,null,null,New Orleans Saints / 5th / 164th pick / 2009,2009
+2,2009,Tim Masthay,P,10,Kentucky,College Stats,6-1,198,4.80,null,8,null,null,null,null,2009
+3,2009,Jake Ingram,LS,1,Hawaii,College Stats,6-3,232,4.90,null,15,null,null,null,New England Patriots / 6th / 198th pick / 2009,2009
+4,2009,Kevin Huber,P,20,Cincinnati,College Stats,6-1,220,4.87,null,null,null,null,null,Cincinnati Bengals / 5th / 142nd pick / 2009,2009
+5,2009,Britton Colquitt,P,19,Tennessee,College Stats,6-3,205,4.89,null,null,null,null,null,null,2009
+6,2009,Justin Brantly,P,null,Texas A&M,College Stats,6-3,249,4.83,null,null,null,null,null,null,2009
+7,2009,Matt Fodge,P,null,Oklahoma State,College Stats,6-0,193,4.93,null,null,null,null,null,null,2009
+8,2009,Sean Griffin,LS,null,Michigan,College Stats,6-1,242,5.08,null,14,null,null,null,null,2009
+1,2010,Brent Bowden,P,null,Virginia Tech,College Stats,6-2,202,4.80,null,null,null,null,null,Tampa Bay Buccaneers / 6th / 172nd pick / 2010,2010
+2,2010,Zoltan Mesko,P,6,Michigan,College Stats,6-4,240,4.79,null,16,null,null,null,New England Patriots / 5th / 150th pick / 2010,2010
+3,2010,Robert Malone,P,4,Fresno State,College Stats,6-2,235,4.84,null,19,null,null,null,null,2010
+4,2010,Clint Gresham,LS,6,TCU,College Stats,6-3,236,5.08,null,null,null,null,null,null,2010
+5,2010,Matt Dodge,P,2,East Carolina,College Stats,6-1,224,null,null,null,null,null,null,New York Giants / 7th / 221st pick / 2010,2010
+6,2010,Scott Ravanesi,P,null,Southern Illinois,null,6-0,191,4.85,null,null,null,null,null,null,2010
+1,2011,Chas Henry,P,2,Florida,College Stats,6-3,219,4.85,null,null,null,null,null,null,2011
+2,2011,Ryan Donahue,P,1,Iowa,College Stats,6-2,193,4.90,null,null,null,null,null,null,2011
+3,2011,Matt Bosher,P,14,Miami (FL),College Stats,6-1,208,4.78,null,8,null,null,null,Atlanta Falcons / 6th / 192nd pick / 2011,2011
+4,2011,Danny Aiken,LS,4,Virginia,College Stats,6-4,244,5.00,null,11,null,null,null,null,2011
+5,2011,Reid Forrest,P,null,Washington State,College Stats,6-0,189,4.69,null,null,null,null,null,null,2011
+1,2012,Shawn Powell,P,2,Florida State,College Stats,6-4,248,5.06,null,null,null,null,null,null,2012
+2,2012,Brad Nortman,P,12,Wisconsin,College Stats,6-2,213,4.78,null,null,null,null,null,Carolina Panthers / 6th / 207th pick / 2012,2012
+3,2012,Josh Harris,LS,6,Auburn,College Stats,6-1,252,4.82,null,15,null,null,null,null,2012
+4,2012,Drew Butler,P,2,Georgia,College Stats,6-1,203,5.04,null,null,null,null,null,null,2012
+5,2012,Bryan Anger,P,15,California,College Stats,6-4,208,4.86,null,null,null,null,null,Jacksonville Jaguars / 3rd / 70th pick / 2012,2012
+6,2012,Brian Stahovich,P,null,San Diego State,College Stats,6-0,211,4.78,null,null,null,null,null,null,2012
+7,2012,Kyle Martens,P,null,Rice,College Stats,6-5,226,4.92,null,null,null,null,null,null,2012
+1,2013,Brad Wing,P,8,LSU,College Stats,6-2,205,4.86,null,null,null,null,null,null,2013
+2,2013,Quinn Sharp,P,null,Oklahoma State,College Stats,6-1,189,4.86,null,null,null,null,null,null,2013
+3,2013,Jeff Locke,P,7,UCLA,College Stats,6-1,209,4.82,null,null,null,null,null,Minnesota Vikings / 5th / 155th pick / 2013,2013
+4,2013,Scott Kovanda,P,null,Ball State,College Stats,6-2,207,4.84,null,null,null,null,null,null,2013
+5,2013,Ryan Allen,P,11,Louisiana Tech,College Stats,6-1,229,4.98,null,null,null,null,null,null,2013
+6,2013,Dylan Breeding,P,null,Arkansas,College Stats,6-1,213,4.74,29.0,11,110,null,null,null,2013
+7,2013,Bobby Cowan,P,null,Idaho,College Stats,6-4,219,5.13,null,null,null,null,null,null,2013
+8,2013,Alex Dunnachie,P,null,Hawaii,College Stats,6-3,217,4.97,null,null,null,null,null,null,2013
+9,2013,Josh Hubner,P,null,Arizona State,College Stats,6-4,232,5.06,null,13,null,null,null,null,2013
+10,2013,Luke Ingram,LS,null,Hawaii,College Stats,6-5,258,5.05,null,24,106,null,null,null,2013
+1,2014,Pat O'Donnell,P,8,Miami (FL),College Stats,6-4,220,4.64,30.5,23,120,null,null,Chicago Bears / 6th / 191st pick / 2014,2014
+2,2014,Cody Mandell,P,null,Alabama,College Stats,6-2,216,4.89,27.0,null,109,null,null,null,2014
+3,2014,Richie Leone,P,null,Houston,College Stats,6-3,211,5.10,null,null,null,null,null,null,2014
+4,2014,Tom Hornsey,P,null,Memphis,College Stats,6-3,221,5.05,null,null,null,null,null,null,2014
+5,2014,Steven Clark,P,null,Auburn,College Stats,6-5,231,5.18,null,null,null,null,null,null,2014
+6,2014,Marcus Heit,LS,null,Kansas State,null,6-3,258,4.91,29.0,null,115,null,null,null,2014
+1,2015,Spencer Roth,P,null,Baylor,College Stats,6-4,227,5.06,null,null,null,null,null,null,2015
+2,2015,Bradley Pinion,P,4,Clemson,College Stats,6-5,229,5.18,null,null,null,null,null,San Francisco 49ers / 5th / 165th pick / 2015,2015
+3,2015,Trevor Pardula,P,null,Kansas,College Stats,6-4,227,5.12,null,null,null,null,null,null,2015
+4,2015,Will Johnson,P,null,Texas State,College Stats,6-2,206,5.02,null,null,null,null,null,null,2015
+5,2015,Kyle Christy,P,null,Florida,College Stats,6-2,202,4.93,null,null,null,null,null,null,2015
+6,2015,Joe Cardona,LS,3,Navy,College Stats,6-2,242,4.91,33.0,30,null,null,null,New England Patriots / 5th / 166th pick / 2015,2015
+7,2015,Will Baumann,P,null,North Carolina State,null,6-6,187,5.14,null,null,null,null,null,null,2015
+8,2015,Kyle Loomis,P,null,Portland State,null,6-2,221,5.08,null,null,null,null,null,null,2015
+1,2016,Nick O'Toole,P,null,West Virginia,College Stats,6-3,219,5.05,null,null,null,null,null,null,2016
+2,2016,Will Monday,P,null,Duke,College Stats,6-4,212,5.10,null,null,null,null,null,null,2016
+3,2016,Jimmy Landes,LS,null,Baylor,College Stats,6-1,240,4.95,27.5,null,110,7.05,4.38,Detroit Lions / 6th / 210th pick / 2016,2016
+4,2016,Drew Kaser,P,6,Texas A&M,College Stats,6-2,212,4.95,null,null,null,null,null,San Diego Chargers / 6th / 179th pick / 2016,2016
+5,2016,Tom Hackett,P,null,Utah,College Stats,5-10,198,4.86,null,null,null,null,null,null,2016
+6,2016,Riley Dixon,P,4,Syracuse,College Stats,6-4,221,5.04,null,null,null,null,null,Denver Broncos / 7th / 228th pick / 2016,2016
+7,2016,Lachlan Edwards,P,null,Sam Houston St,null,6-4,209,4.98,null,null,null,null,null,null,2016
+1,2017,Justin Vogel,P,2,Miami (FL),College Stats,6-4,219,4.70,34.0,null,null,null,null,null,2017
+2,2017,Austin Rehkow,P,null,Idaho,College Stats,6-3,214,null,null,null,null,null,null,null,2017
+3,2017,Bradley Northnagel,LS,null,California,College Stats,6-2,243,5.30,25.5,null,99,null,null,null,2017
+4,2017,Cameron Johnston,P,null,Ohio State,College Stats,5-11,194,4.92,null,null,null,null,null,null,2017
+5,2017,Hayden Hunt,P,null,Colorado State,College Stats,6-0,212,null,null,null,null,null,null,null,2017
+6,2017,Colin Holba,LS,0,Louisville,College Stats,6-4,248,5.19,28.0,null,115,null,null,Pittsburgh Steelers / 6th / 213th pick / 2017,2017
+7,2017,Toby Baker,P,null,Arkansas,College Stats,6-3,210,null,null,null,null,null,null,null,2017
