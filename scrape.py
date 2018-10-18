@@ -283,7 +283,7 @@ def getData():
 
     if len(os.listdir(path1)) < 100:    
         print("####### Scrapping NFL Data #######")
-        years = getYears(1937,2018) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
+        years = getYears(1993,1995) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
         NFLPlayers = ScrapeNflDraftData(years)
         writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
     
