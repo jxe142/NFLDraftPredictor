@@ -179,7 +179,7 @@ def ScrapeNflDraftData(years):
             for row in tableBody :
                 data = cleanRow(row,year,"draft")
                 
-                if(int(year) < 1993 ): # Years from 1993 down don't have solo tackles
+                if(int(year) < 1994 ): # Years from 1993 down don't have solo tackles
                     split = data.split(",")
                     count = 0
                     newData = ""
@@ -283,7 +283,7 @@ def getData():
 
     if len(os.listdir(path1)) < 100:    
         print("####### Scrapping NFL Data #######")
-        years = getYears(1993,1995) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
+        years = getYears(1937,2018) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
         NFLPlayers = ScrapeNflDraftData(years)
         writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
     
