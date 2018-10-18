@@ -1,4 +1,4 @@
-Rk, Year, Player, Pos, AV, School, College, Height, Wt, 40yd, Vertical, BenchReps, Broad Jump, 3Cone, Shuttle, Drafted (Tm / Rd/ Yr), Year
+Rk,Year,Player,Pos,AV,School,College,Height,Wt,40yd,Vertical,BenchReps,Broad Jump,3Cone,Shuttle,Drafted (Tm / Rd/ Yr),Year
 1,2000,Brian Young,DE,47,Texas-El Paso,College Stats,6-2,278,4.94,29.5,27,106,7.20,4.47,St. Louis Rams / 5th / 139th pick / 2000,2000
 2,2000,Cedric Woodard,DT,15,Texas,null,6-2,290,5.21,30.5,23,109,null,null,Baltimore Ravens / 6th / 191st pick / 2000,2000
 3,2000,Antonio Wilson,OLB,2,Texas A&M-Commerce,null,6-2,245,4.56,null,11,null,null,null,Minnesota Vikings / 4th / 106th pick / 2000,2000
@@ -2266,7 +2266,7 @@ Rk, Year, Player, Pos, AV, School, College, Height, Wt, 40yd, Vertical, BenchRep
 98,2015,Durell Eskridge,FS,null,Syracuse,College Stats,6-3,208,4.56,31.0,null,117,7.09,4.26,null,2015
 99,2015,Kyle Emanuel,OLB,13,North Dakota State,null,6-3,255,4.77,34.0,27,120,7.10,4.25,San Diego Chargers / 5th / 153rd pick / 2015,2015
 100,2015,Ifo Ekpre-Olomu,CB,null,Oregon,College Stats,5-9,192,4.52,null,null,null,null,null,Cleveland Browns / 7th / 241st pick / 2015,2015
-101,2015,Mario Edwards, Jr.,DE,11,Florida State,College Stats,6-3,279,4.76,32.5,32,120,7.44,4.55,Oakland Raiders / 2nd / 35th pick / 2015,2015
+101,2015,Mario Edwards Jr.,DE,11,Florida State,College Stats,6-3,279,4.76,32.5,32,120,7.44,4.55,Oakland Raiders / 2nd / 35th pick / 2015,2015
 102,2015,Alvin Dupree,DE,12,Kentucky,College Stats,6-4,269,4.56,42.0,null,138,null,null,Pittsburgh Steelers / 1st / 22nd pick / 2015,2015
 103,2015,B.J. Dubose,DE,null,Louisville,College Stats,6-4,284,5.06,null,26,null,null,null,Minnesota Vikings / 6th / 193rd pick / 2015,2015
 104,2015,Kurtis Drummond,FS,2,Michigan State,College Stats,6-1,208,4.65,39.5,null,119,7.09,4.33,null,2015

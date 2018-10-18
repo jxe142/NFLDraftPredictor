@@ -40,7 +40,8 @@ def cleanRow(row,year,dType):
             count += 1
         text += year
         text = text.replace(",*,", ",") # cleans the data form something we scrapped 
-        text = text.replace("*,", ",") # cleans the data form something we scrapped 
+        text = text.replace("*,", ",") # cleans the data form something we scrapped
+        text = text.replace(", Jr.", " Jr.") # clean data that has Jrs. and commas
     return text
 
 
@@ -281,17 +282,17 @@ def getData():
     #     writeCSV("./data/CollegeStatsData/ReceivingData.csv", ReceivingPlayersCollege) 
     #     writeCSV("./data/CollegeStatsData/PassingData.csv", PassingPlayersCollege) 
 
-    if len(os.listdir(path1)) < 100:    
-        print("####### Scrapping NFL Data #######")
-        years = getYears(1937,2018) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
-        NFLPlayers = ScrapeNflDraftData(years)
-        writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
+    # if len(os.listdir(path1)) < 2:    
+    #     print("####### Scrapping NFL Data #######")
+    #     years = getYears(1937,2018) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
+    #     NFLPlayers = ScrapeNflDraftData(years)
+    #     writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
     
-    # if len(os.listdir(path2)) < 3 :
-    #     print("####### Scrapping Combine Data #######")
-    #     years = getYears(2000,2018) # Max range 2000 - 2018
-    #     dataTypes = ['Offense', 'Defense', 'Special'] 
-    #     OffensePlayers, DefensePlayers, SpecailPlayers = ScrapeCombineData(years,["Offense","Defense", "Special"]) 
-    #     writeCSV("./data/CombineData/OffensePlayersData.csv", OffensePlayers) 
-    #     writeCSV("./data/CombineData/DefensePlayersData.csv", DefensePlayers) 
-    #     writeCSV("./data/CombineData/SpecailPlayersData.csv", SpecailPlayers) 
+    if len(os.listdir(path2)) < 3 :
+        print("####### Scrapping Combine Data #######")
+        years = getYears(2000,2018) # Max range 2000 - 2018
+        dataTypes = ['Offense', 'Defense', 'Special'] 
+        OffensePlayers, DefensePlayers, SpecailPlayers = ScrapeCombineData(years,["Offense","Defense", "Special"]) 
+        writeCSV("./data/CombineData/OffensePlayersData.csv", OffensePlayers) 
+        writeCSV("./data/CombineData/DefensePlayersData.csv", DefensePlayers) 
+        writeCSV("./data/CombineData/SpecailPlayersData.csv", SpecailPlayers) 
