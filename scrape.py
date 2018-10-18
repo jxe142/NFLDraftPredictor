@@ -8,7 +8,8 @@ from bs4 import BeautifulSoup
 
 '''
     TODO: [X] Need to clean data  that is missing notes and fill them in with nulls
-          [ ] Write a csv converter that takes in list and writes as CSV
+          [X] Write a csv converter that takes in list and writes as CSV
+          [ ] fix the Draft data Sk and College are in the wrong place as well as draft year is out of wack
 '''
 
 def getYears(start,end):
@@ -17,18 +18,26 @@ def getYears(start,end):
         years.append(str(x))
     return years
 
-def cleanRow(row,year):
+def cleanRow(row,year,dType):
     text = ""
     test = row.getText(",")
+    
+    count = 0
     if(test[0].isdigit()): # Makes the lines we need each row in the table
         for td in row:
             data = td.getText()
+            if(count == 27 and dType == "draft" ): # helps clean up rows that are missing College stats field
+                data = "College Stats"
+            elif(count == 28 and dType == "draft" ): # helps clean up rows that are missing College stats field
+                data = "College Stats"
+            
             if(data == ""):
                 data = "null,"
                 text += data
             else:
                 data += ","
                 text += data
+            count += 1
         text += year
         text = text.replace(",*,", ",") # cleans the data form something we scrapped 
         text = text.replace("*,", ",") # cleans the data form something we scrapped 
@@ -66,16 +75,16 @@ def ScrapeCollegeStats(years,dataTypes):
     PassingPlayers = [] # Holds the data for the QB's
     ReceivingPlayers = [] # Holds the data for Recviers 
 
-    passingTableStrcut = " Rnk, Player Name, School, Conf, Games Played, Cmp (passing), Att (passing),  Percent (passing),  Yards (passing),  Avg Yards (passing),AY/A (passing)"
-    passingTableStrcut += ",TD (passing), Interceptins (passing), Rate (passing), Att (rushing), Yds (rushing), Avg Yards (rushing), TD (rushing), Year"
+    passingTableStrcut = " Rnk,Player Name,School,Conf,Games Played,Cmp (passing),Att (passing),Percent (passing),Yards (passing),Avg Yards (passing),AY/A (passing)"
+    passingTableStrcut += ",TD (passing),Interceptins (passing),Rate (passing),Att (rushing),Yds (rushing),Avg Yards (rushing),TD (rushing),Year"
     PassingPlayers.append(passingTableStrcut)
     
-    rushingTableStruct = "Rnk, Player, School, Conf, Games Played, Att (rushing), Yds (rushing), Avg (rushing), TD (rushing), Rec (receiving), Yds (receiving),"
-    rushingTableStruct +=  "Avg (receiving), TD (receiving), Plays (scrimmage), Yds (scrimmage), Avg (scrimmage), TD (scrimmage), Year"
+    rushingTableStruct = "Rnk,Player,School,Conf,Games Played,Att (rushing),Yds (rushing),Avg (rushing),TD (rushing),Rec (receiving),Yds (receiving),"
+    rushingTableStruct +=  "Avg (receiving),TD (receiving),Plays (scrimmage),Yds (scrimmage),Avg (scrimmage),TD (scrimmage),Year"
     RushingPlayers.append(rushingTableStruct)
 
-    receivingTableStrcut = " Rnk, Player, School, Conf, Games Played, Rec (receiving), Yds (receiving), Avg (receiving), TD (receiving),  Att (rushing), Yds (rushing),"
-    receivingTableStrcut += "Avg (rushing), TD (rushing), Plays (scrimmage), Yds (scrimmage), Avg (scrimmage), TD (scrimmage), Year "
+    receivingTableStrcut = " Rnk,Player,School,Conf,Games Played,Rec (receiving),Yds (receiving),Avg (receiving),TD (receiving),Att (rushing),Yds (rushing),"
+    receivingTableStrcut += "Avg (rushing),TD (rushing),Plays (scrimmage),Yds (scrimmage),Avg (scrimmage),TD (scrimmage),Year "
     ReceivingPlayers.append(receivingTableStrcut)
 
     for year in years:
@@ -111,7 +120,7 @@ def ScrapeCollegeStats(years,dataTypes):
                 tableBody = table.find('tbody').select("tr")
 
                 for row in tableBody :
-                    data = cleanRow(row,year)
+                    data = cleanRow(row,year,"college")
                     if(data != ""):
                         if (infoType == "Rushing"):
                             RushingPlayers.append(data)
@@ -130,21 +139,25 @@ def ScrapeCollegeStats(years,dataTypes):
 ################################################ METHODS FOR THE NFL DATA ################################################
 '''
     * Number of Players in total (1937 - 2017) 24,788
-    * Pulls in the NFL data for passing yards 
+    * Pulls in the NFL draft
     * The years are from 1937 until 2017
+    * Years from 1993 down don't have solo tackles so we had col and nulls 
+
     
     * Table structure Passing :
     Rnd | Pick | Team | Player Name | Pos | Age | To (year they play to) | AP1 | PB | ST | CarAV | DrAV | G | Cmp (passing) | Att (passing) | Yds (passing) | Tds (passing) |
-    Int (passing) | Att (rushing) | Yds (rushing) | TD (rushing) | Rec (receiving) | Yds (receiving) | TD (receiving) | Tkl | Int | Sk | College | Draft Year
+    Int (passing) | Att (rushing) | Yds (rushing) | TD (rushing) | Rec (receiving) | Yds (receiving) | TD (receiving) | Tkl (solo) | Int | Sk | College | Draft Year
 
 '''
 
 def ScrapeNflDraftData(years):
     Players = []
 
-    tableStruct = "Rnd, Pick, Team, Player Name, Pos, Age, To (year they play to), AP1, PB, ST, CarAV, DrAV, G, Cmp (passing), Att (passing), Yds (passing), Tds (passing),"
-    tableStruct += "Int (passing), Att (rushing), Yds (rushing), TD (rushing), Rec (receiving), Yds (receiving), TD (receiving), Tkl, Int, Sk, College, Draft Year"
+    tableStruct = "Rnd,Pick,Team,Player Name,Pos,Age,To (year they play to),AP1,PB,ST,CarAV,DrAV,G,Cmp (passing),Att (passing),Yds (passing),Tds (passing),"
+    tableStruct += "Int (passing),Att (rushing),Yds (rushing),TD (rushing),Rec (receiving),Yds (receiving),TD (receiving),Tkl (solo),Int,Sk,College,Draft Year"
+    print(tableStruct)
     Players.append(tableStruct)
+
 
     for year in years:
         print("Getting NFL data for " + year + ":")
@@ -164,7 +177,26 @@ def ScrapeNflDraftData(years):
             tableBody = table.find('tbody').select("tr")
 
             for row in tableBody :
-                data = cleanRow(row,year)
+                data = cleanRow(row,year,"draft")
+                
+                if(int(year) < 1994 ): # Years from 1993 down don't have solo tackles
+                    split = data.split(",")
+                    count = 0
+                    newData = ""
+                    for string  in split:
+                        print(split)
+                        count += 1
+                        if(count == 25): # 26 
+                            newData += "null,"
+                        if(count == 30): # 26 
+                            print(newData)
+                            exit()
+                        print(newData)
+                        newData += string + ","
+                        if(count == len(split)):
+                            newData = newData[:-1]
+                    data = newData
+                    
                 if(data != ""):
                     data = data.replace(",College Stats", "") # cleans the data form something we scrapped 
                     Players.append(data)
@@ -190,7 +222,7 @@ def ScrapeCombineData(years,dataTypes):
     DefensePlayers = [] # Holds the data for Defense
     SpecailPlayers = [] # Holds the data for Special Teams  
 
-    tableStruct = "Rk, Year, Player, Pos, AV, School, College, Height, Wt, 40yd, Vertical, BenchReps, Broad Jump, 3Cone, Shuttle, Drafted (Tm / Rd/ Yr), Year"
+    tableStruct = "Rk,Year,Player,Pos,AV,School,College,Height,Wt,40yd,Vertical,BenchReps,Broad Jump,3Cone,Shuttle,Drafted (Tm / Rd/ Yr),Year"
     OffensePlayers.append(tableStruct)
     DefensePlayers.append(tableStruct)
     SpecailPlayers.append(tableStruct)
@@ -224,7 +256,7 @@ def ScrapeCombineData(years,dataTypes):
                 tableBody = table.find('tbody').select("tr")
 
                 for row in tableBody :
-                    data = cleanRow(row,year)
+                    data = cleanRow(row,year,"combine")
                     if(data != ""):
                         if (infoType == "Offense"):
                             OffensePlayers.append(data)
@@ -245,26 +277,26 @@ def getData():
     path1 = os.path.abspath("./data/NflDraftData/") 
     path2 = os.path.abspath("./data/CombineData/") 
 
-    if len(os.listdir(path0)) < 3:
-        print("####### Scrapping College Data #######")
-        years = getYears(1956,2018) # Max range 1956 - 2018 Note add one extra year to end
-        dataTypes = ['Rushing', 'Passing', 'Receiving']
-        RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
-        writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
-        writeCSV("./data/CollegeStatsData/ReceivingData.csv", ReceivingPlayersCollege) 
-        writeCSV("./data/CollegeStatsData/PassingData.csv", PassingPlayersCollege) 
+    # if len(os.listdir(path0)) < 3:
+    #     print("####### Scrapping College Data #######")
+    #     years = getYears(1956,2018) # Max range 1956 - 2018 Note add one extra year to end
+    #     dataTypes = ['Rushing', 'Passing', 'Receiving']
+    #     RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
+    #     writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
+    #     writeCSV("./data/CollegeStatsData/ReceivingData.csv", ReceivingPlayersCollege) 
+    #     writeCSV("./data/CollegeStatsData/PassingData.csv", PassingPlayersCollege) 
 
-    if len(os.listdir(path1)) < 2 :    
+    if len(os.listdir(path1)) < 100:    
         print("####### Scrapping NFL Data #######")
-        years = getYears(1937,2018) # Max range 1937 - 2018
+        years = getYears(1993,1994) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
         NFLPlayers = ScrapeNflDraftData(years)
         writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
     
-    if len(os.listdir(path2)) < 3 :
-        print("####### Scrapping Combine Data #######")
-        years = getYears(2000,2018) # Max range 2000 - 2018
-        dataTypes = ['Offense', 'Defense', 'Special'] 
-        OffensePlayers, DefensePlayers, SpecailPlayers = ScrapeCombineData(years,["Offense","Defense", "Special"]) 
-        writeCSV("./data/CombineData/OffensePlayersData.csv", OffensePlayers) 
-        writeCSV("./data/CombineData/DefensePlayersData.csv", DefensePlayers) 
-        writeCSV("./data/CombineData/SpecailPlayersData.csv", SpecailPlayers) 
+    # if len(os.listdir(path2)) < 3 :
+    #     print("####### Scrapping Combine Data #######")
+    #     years = getYears(2000,2018) # Max range 2000 - 2018
+    #     dataTypes = ['Offense', 'Defense', 'Special'] 
+    #     OffensePlayers, DefensePlayers, SpecailPlayers = ScrapeCombineData(years,["Offense","Defense", "Special"]) 
+    #     writeCSV("./data/CombineData/OffensePlayersData.csv", OffensePlayers) 
+    #     writeCSV("./data/CombineData/DefensePlayersData.csv", DefensePlayers) 
+    #     writeCSV("./data/CombineData/SpecailPlayersData.csv", SpecailPlayers) 
