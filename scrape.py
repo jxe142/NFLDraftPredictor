@@ -26,7 +26,7 @@ def cleanRow(row,year,dType):
     if(test[0].isdigit()): # Makes the lines we need each row in the table
         for td in row:
             data = td.getText()
-            if(count == 27 and dType == "draft" ): # helps clean up rows that are missing College stats field
+            if(count == 27 and dType == "draft" and int(year) < 1994 ): # helps clean up rows that are missing College stats field
                 data = "College Stats"
             elif(count == 28 and dType == "draft" ): # helps clean up rows that are missing College stats field
                 data = "College Stats"
@@ -179,19 +179,14 @@ def ScrapeNflDraftData(years):
             for row in tableBody :
                 data = cleanRow(row,year,"draft")
                 
-                if(int(year) < 1994 ): # Years from 1993 down don't have solo tackles
+                if(int(year) < 1993 ): # Years from 1993 down don't have solo tackles
                     split = data.split(",")
                     count = 0
                     newData = ""
                     for string  in split:
-                        print(split)
                         count += 1
                         if(count == 25): # 26 
                             newData += "null,"
-                        if(count == 30): # 26 
-                            print(newData)
-                            exit()
-                        print(newData)
                         newData += string + ","
                         if(count == len(split)):
                             newData = newData[:-1]
@@ -288,7 +283,7 @@ def getData():
 
     if len(os.listdir(path1)) < 100:    
         print("####### Scrapping NFL Data #######")
-        years = getYears(1993,1994) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
+        years = getYears(1937,2018) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
         NFLPlayers = ScrapeNflDraftData(years)
         writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
     
