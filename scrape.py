@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 '''
     TODO: [X] Need to clean data  that is missing notes and fill them in with nulls
           [X] Write a csv converter that takes in list and writes as CSV
-          [ ] fix the Draft data Sk and College are in the wrong place as well as draft year is out of wack
+          [X] fix the Draft data Sk and College are in the wrong place as well as draft year is out of wack
 '''
 
 def getYears(start,end):
@@ -55,7 +55,7 @@ def writeCSV(fileName,dataList):
 ################################################ METHODS FOR The College STATS DATA ################################################
 '''
     * We have about 40,364  nodes in the college data in total 
-    * Pulls in the collage data for Passing, Rushing and Receiving 
+    * Pulls in the collage data for Passing, Rushing and Receiving which means we can only look at offensive players QB, Rec, RB, TE
     * The years are from 1956 until 2017 
     
     * Table structure Passing :
@@ -273,20 +273,20 @@ def getData():
     path1 = os.path.abspath("./data/NflDraftData/") 
     path2 = os.path.abspath("./data/CombineData/") 
 
-    # if len(os.listdir(path0)) < 3:
-    #     print("####### Scrapping College Data #######")
-    #     years = getYears(1956,2018) # Max range 1956 - 2018 Note add one extra year to end
-    #     dataTypes = ['Rushing', 'Passing', 'Receiving']
-    #     RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
-    #     writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
-    #     writeCSV("./data/CollegeStatsData/ReceivingData.csv", ReceivingPlayersCollege) 
-    #     writeCSV("./data/CollegeStatsData/PassingData.csv", PassingPlayersCollege) 
+    if len(os.listdir(path0)) < 3:
+        print("####### Scrapping College Data #######")
+        years = getYears(2000,2018) # Max range 1956 - 2018 Note add one extra year to end
+        dataTypes = ['Rushing', 'Passing', 'Receiving']
+        RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
+        writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
+        writeCSV("./data/CollegeStatsData/ReceivingData.csv", ReceivingPlayersCollege) 
+        writeCSV("./data/CollegeStatsData/PassingData.csv", PassingPlayersCollege) 
 
-    # if len(os.listdir(path1)) < 2:    
-    #     print("####### Scrapping NFL Data #######")
-    #     years = getYears(1937,2018) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
-    #     NFLPlayers = ScrapeNflDraftData(years)
-    #     writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
+    if len(os.listdir(path1)) < 2:    
+        print("####### Scrapping NFL Data #######")
+        years = getYears(2000,2018) # Max range 1937 - 2018 (Note years from 1937 - 1993 have one less column)
+        NFLPlayers = ScrapeNflDraftData(years)
+        writeCSV("./data/NflDraftData/draftData.csv",NFLPlayers) 
     
     if len(os.listdir(path2)) < 3 :
         print("####### Scrapping Combine Data #######")

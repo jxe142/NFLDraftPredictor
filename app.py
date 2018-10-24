@@ -5,83 +5,72 @@ import os
 import urllib.request as request, urllib.error as error
 from bs4 import BeautifulSoup
 from scrape import ScrapeCollegeStats, ScrapeNflDraftData, ScrapeCombineData, getYears, writeCSV, getData
-# from pyspark import SparkConf, SparkContext
-# from pyspark.sql import SparkSession
-# from pyspark.sql import functions as F
-# from pyspark.sql.types import IntegerType
+from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession
+from pyspark.sql import functions as F
+from pyspark.sql.types import IntegerType, DoubleType
+from pyspark.ml.feature import Imputer
 
-# #Takes in the path to a draft file and returns a cleander version as a DataFrame (or a RDD)
-# def cleanNFLDraftFile(path):
-#     unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load(path)
-#     unCleanData.cache()
 
-#     #drop row we don't need
-#     dropList = ['To', 'AP1', 'PB', 'St', 'CarAV', 'DrAV', 'G', 'Cmp', 'Att14', 'Yds15', 'TD16', 'Int17', 'Att18', 'Yds19', 'TD20',
-#     'Rec', 'Yds22', 'TD23', 'Tkl', 'Int25', 'Sk']
-#     unCleanData = unCleanData.select([column for column in unCleanData.columns if column not in dropList])
-
-#     #Clean Data of all Linemen
-#     unCleanData = unCleanData.where(unCleanData['Pos'] != 'C') #Centers
-#     unCleanData = unCleanData.where(unCleanData['Pos'] != 'G') #Guards
-#     unCleanData = unCleanData.where(unCleanData['Pos'] != 'T') #Tackles
-
-#     unCleanData.show()
-#     return unCleanData
-
-def cleanDraftData():
+#Takes in the path to a draft file and returns a cleander version as a DataFrame (or a RDD)
+def cleanDraftData(postion):
+    '''
+        [X] need to fill in nulls for the Age with the AVG, or with the median of all the ages  --> opted out for the medium 
+    '''
     unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("./data/NflDraftData/draftData.csv")
-    for c in unCleanData.columns:
-        print(c)
-    # drop columns we don't nee
-    unCleanData = unCleanData.select("Rnd", " Pick", " Player Name", " Pos", ' Age', ' SK', ' College', ' Draft Year')
 
-    #drop lineman both offense and defense
-    droppedPostions = ['DE', 'DT', 'T', 'O', 'G', 'C', 'K','NT', 'DL', 'OL', 'LS'] # ? Ls, 
-    for postion in droppedPostions:
-        unCleanData = unCleanData.where(unCleanData[" Pos"] != postion)
+    # drop columns we don't need
+    unCleanData = unCleanData.select("Rnd", "Pick", "Player Name", "Pos", 'Age', 'College', 'Draft Year')
 
-    print("###############")
-    print(unCleanData.count())
+    if(postion == "RB" or postion == "QB" or postion == "WR"):
+        unCleanData = unCleanData.where(unCleanData["Pos"] == postion)
+    else: # Retrun all of the skill offensive players (WR, RB, TE, QB, FB)
+        #drop lineman both offense and defense as well as defensive players and special teams
+        droppedPostions = ['DE', 'DT', 'T', 'O', 'G', 'C', 'K','NT', 'DL', 'OL', 'LS', 'LB', 'DB','P', 'OLB', 'CB', 'S', 'ILB'] # With only O players we are down to 2000 data pints
+        for postion in droppedPostions:
+            unCleanData = unCleanData.where(unCleanData["Pos"] != postion)
+    
+    # Cast values to doubles
+    doubleCols = ['Age', 'Rnd', 'Pick', 'Draft Year']
+    for c in doubleCols:
+        unCleanData = unCleanData.withColumn(c, unCleanData[c].cast(DoubleType()))
 
-    # drop special teams
-    unCleanData
+    # Used to fill in Null values with the medium
+    imputer = Imputer(
+    inputCols=["Age"], 
+    outputCols=["Age"]
+    )   
+    cleanData = imputer.setStrategy("median").fit(unCleanData).transform(unCleanData)
+    cleanData.show()
+    return cleanData
+
+def cleanCombineData(postion): # 2688 --> RB 509
+    '''
+        [ ] need to fill these rows with the mean or avg if the data is null -->  [AV, Height, Wt, 40yd, Vertical, BechReps, Broad Jump, Shuttle ]
+        [ ] need to fill drafted with false if it null and true with is anything else
+    '''
+    unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("./data/CombineData/OffensePlayersData.csv")
+    unCleanData = unCleanData.select("Rk", "Year16", "Player", "Pos", 'AV', 'School', 'Height', 'Wt', '40yd', 'Vertical', 'BenchReps', 'Broad Jump', 'Shuttle', 'Drafted (Tm / Rd/ Yr)')
+    unCleanData = unCleanData.withColumnRenamed("Year16", 'Year').withColumnRenamed("Drafted (Tm / Rd/ Yr)", "Drafted")
+
+    if(postion == "RB" or postion == "QB" or postion == "WR"):
+        unCleanData = unCleanData.where(unCleanData["Pos"] == postion)
+
+    cleanData = unCleanData
+    print(cleanData.count())
+    cleanData.show()
+    return cleanData
 
 def main():
     getData()
 
 main()
 
-
-# def getNFLData():
-#     cleanDraftData = []
-#     paths = getNFLDraftPaths()
-
-#     #Clean the data
-#     for path in paths:
-#         print(path)
-#         cleanDraftData.append(cleanNFLDraftFile(path))
-
-#     #Join each dataframe together
-#     NflDataFrame = cleanDraftData.pop()
-#     for dataframe in cleanDraftData:
-#         NflDataFrame = NflDataFrame.union(dataframe)
-    
-#     return NflDataFrame
-
-# #Method used to grab all of the NFL Draft Data and clean lineman from it
-# def getNFLDraftPaths():
-#     csvFilesPath = []
-#     for x in glob.glob("./NflDraftData/*.csv"):
-#         csvFilesPath.append(x)
-    
-#     return csvFilesPath
-
-
 #Config
-# conf = SparkConf()
-# sc = SparkContext(conf=conf)
-# spark = SparkSession.builder.appName("NflDraftApp").config("spark.some.config.option", "some-value").getOrCreate()
-# cleanDraftData()
-# NflDataFrame = getNFLData()
-# NflDataFrame.show()
-# print("############ " + str(NflDataFrame.count()))
+conf = SparkConf()
+sc = SparkContext(conf=conf)
+spark = SparkSession.builder.appName("NflDraftApp").config("spark.some.config.option", "some-value").getOrCreate()
+nflDF =  cleanDraftData("RB") # takes in either RB, QB, WR since these are the main postions we can analytics on 
+                               # Note from 2000 - 2018 we have 371 RBs, 223 QBs, 585 WRs
+#combineDF = cleanCombineData("RB")
+print("############ " + str(NflDataFrame.count()))
