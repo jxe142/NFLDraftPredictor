@@ -8,6 +8,7 @@ from scrape import ScrapeCollegeStats, ScrapeNflDraftData, ScrapeCombineData, ge
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
+from pyspark.sql.functions import col, udf, array
 from pyspark.sql.types import IntegerType, DoubleType
 from pyspark.ml.feature import Imputer
 
@@ -36,13 +37,63 @@ def cleanDraftData(postion):
         unCleanData = unCleanData.withColumn(c, unCleanData[c].cast(DoubleType()))
 
     # Used to fill in Null values with the medium
-    imputer = Imputer(
-    inputCols=["Age"], 
-    outputCols=["Age"]
-    )   
+    imputer = Imputer(inputCols=["Age"], outputCols=["Age"])   
     cleanData = imputer.setStrategy("median").fit(unCleanData).transform(unCleanData)
     cleanData.show()
     return cleanData
+
+def cleanCollegeData(postion):
+    if(postion == "RB"):
+        unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("./data/CollegeStatsData/RushingData.csv")
+        # Drop Avgs since we will recompute them once we combine all similar player together
+        unCleanData = unCleanData.drop('Rnk', 'Avg (rushing)','Avg (receiving)','Avg (scrimmage)')
+    
+        # If there are four nulls in Rec (receiving), Yds (receiving), Yds (receiving), TD (receiving) Drop them they are a QB
+        unCleanData = unCleanData.filter((unCleanData['Rec (receiving)'] != 'null') & (unCleanData['Yds (receiving)'] != 'null') &  (unCleanData['TD (receiving)'] != 'null'))
+
+        # Cast values to double
+        doubleCols = ['Games Played', 'Att (rushing)', 'Yds (rushing)', 'TD (rushing)','Rec (receiving)','Yds (receiving)',
+                      'TD (receiving)', 'Plays (scrimmage)', 'Yds (scrimmage)','TD (scrimmage)']
+        
+        for c in doubleCols:
+            unCleanData = unCleanData.withColumn(c, unCleanData[c].cast(DoubleType()))
+        
+        # Fill nulls with 0's
+        unCleanData = unCleanData.na.fill(0)
+        
+        # Merge rows with the same name and add elements together
+        unCleanDataGrouped = unCleanData.groupBy("Player",'School').sum('Games Played', 'Att (rushing)', 'Yds (rushing)', 'TD (rushing)','Rec (receiving)','Yds (receiving)',
+                      'TD (receiving)', 'Plays (scrimmage)', 'Yds (scrimmage)','TD (scrimmage)')
+
+        # Compute new Avgs
+        averageFunc = udf(lambda array: array[0]/array[1], DoubleType())
+        unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (rushing)", averageFunc(array(unCleanDataGrouped['sum(Yds (rushing))'], unCleanDataGrouped['sum(Att (rushing))'])))
+        unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (receiving)", averageFunc(array(unCleanDataGrouped['sum(Yds (receiving))'], unCleanDataGrouped['sum(Rec (receiving))'])))
+        unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (scrimmage)", averageFunc(array(unCleanDataGrouped['sum(Yds (scrimmage))'], unCleanDataGrouped['sum(Plays (scrimmage))'])))
+        unCleanDataGrouped.show()
+
+        # Rename cols 
+        unCleanDataGrouped = unCleanDataGrouped.select( col("Player"), col("School"), col("sum(Games Played)").alias("Games Played"), col("sum(Att (rushing))").alias("Att (rushing)"),
+        col("sum(Yds (rushing))").alias("Yds (rushing)"), col("Avg (rushing)"), col("sum(TD (rushing))").alias("TD (rushing)"), col("sum(Rec (receiving))").alias("Rec (receiving)"),
+        col("sum(Yds (receiving))").alias("Yds (receiving)"), col("Avg (receiving)"), col("sum(TD (receiving))").alias("TD (receiving)"), col("sum(Plays (scrimmage))").alias("Plays (scrimmage)"),
+        col("sum(Yds (scrimmage))").alias("Yds (scrimmage)"), col("Avg (scrimmage)"), col("sum(TD (scrimmage))").alias("TD (scrimmage)") )
+        
+        # Get the players team and conference of their final year
+        unCleanDataTeams = unCleanData.groupBy('Player','School').agg(F.max("Year").alias("Year")).show()
+
+        # Merge dataframes together
+
+        
+        
+        
+
+
+    elif(postion == "WR"):
+        unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("./data/CollegeStatsData/ReceivingData.csv")
+    elif(postion == "QB"):
+        unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("./data/CollegeStatsData/PassingData.csv")
+
+    
 
 def cleanCombineData(postion): # 2688 --> RB 509
     '''
@@ -70,7 +121,8 @@ main()
 conf = SparkConf()
 sc = SparkContext(conf=conf)
 spark = SparkSession.builder.appName("NflDraftApp").config("spark.some.config.option", "some-value").getOrCreate()
-nflDF =  cleanDraftData("RB") # takes in either RB, QB, WR since these are the main postions we can analytics on 
+#nflDF =  cleanDraftData("RB") # takes in either RB, QB, WR since these are the main postions we can analytics on 
                                # Note from 2000 - 2018 we have 371 RBs, 223 QBs, 585 WRs
+cleanCollegeData("RB")
 #combineDF = cleanCombineData("RB")
 print("############ " + str(NflDataFrame.count()))
