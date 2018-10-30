@@ -8,6 +8,7 @@ from scrape import ScrapeCollegeStats, ScrapeNflDraftData, ScrapeCombineData, ge
 from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
+from pyspark.sql.functions import *
 from pyspark.sql.functions import col, udf, array
 from pyspark.sql.types import IntegerType, DoubleType
 from pyspark.ml.feature import Imputer
@@ -43,6 +44,12 @@ def cleanDraftData(postion):
     return cleanData
 
 def cleanCollegeData(postion):
+    '''
+        * One Flaw to think of if a player graduated in the year 2002 that means we are missing data for the year 1999 since we start at the year 2000
+          Need to find a clever way around this so the data won't be messed up
+        [X] Merge the two Dataframes together
+
+    '''
     if(postion == "RB"):
         unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("./data/CollegeStatsData/RushingData.csv")
         # Drop Avgs since we will recompute them once we combine all similar player together
@@ -70,23 +77,24 @@ def cleanCollegeData(postion):
         unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (rushing)", averageFunc(array(unCleanDataGrouped['sum(Yds (rushing))'], unCleanDataGrouped['sum(Att (rushing))'])))
         unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (receiving)", averageFunc(array(unCleanDataGrouped['sum(Yds (receiving))'], unCleanDataGrouped['sum(Rec (receiving))'])))
         unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (scrimmage)", averageFunc(array(unCleanDataGrouped['sum(Yds (scrimmage))'], unCleanDataGrouped['sum(Plays (scrimmage))'])))
-        unCleanDataGrouped.show()
 
         # Rename cols 
         unCleanDataGrouped = unCleanDataGrouped.select( col("Player"), col("School"), col("sum(Games Played)").alias("Games Played"), col("sum(Att (rushing))").alias("Att (rushing)"),
         col("sum(Yds (rushing))").alias("Yds (rushing)"), col("Avg (rushing)"), col("sum(TD (rushing))").alias("TD (rushing)"), col("sum(Rec (receiving))").alias("Rec (receiving)"),
         col("sum(Yds (receiving))").alias("Yds (receiving)"), col("Avg (receiving)"), col("sum(TD (receiving))").alias("TD (receiving)"), col("sum(Plays (scrimmage))").alias("Plays (scrimmage)"),
         col("sum(Yds (scrimmage))").alias("Yds (scrimmage)"), col("Avg (scrimmage)"), col("sum(TD (scrimmage))").alias("TD (scrimmage)") )
+        unCleanDataGrouped.show()
         
         # Get the players team and conference of their final year
-        unCleanDataTeams = unCleanData.groupBy('Player','School').agg(F.max("Year").alias("Year")).show()
+        unCleanDataTeams = unCleanData.groupBy('Player','School').agg(F.max("Year").alias("Year"))
 
         # Merge dataframes together
+        df1 = unCleanDataGrouped.alias('df1')
+        df2 = unCleanDataTeams.alias('df2')
+        cleanData = df1.join(df2, (df1.Player == df2.Player) & (df1.School == df2.School)).select('df1.*','df2.Year')
+        cleanData.show()
 
-        
-        
-        
-
+        return cleanData
 
     elif(postion == "WR"):
         unCleanData = spark.read.format("csv").option("header", "true").option("inferSchema","true").load("./data/CollegeStatsData/ReceivingData.csv")
