@@ -46,7 +46,8 @@ def cleanDraftData(postion):
 def cleanCollegeData(postion):
     '''
         * One Flaw to think of if a player graduated in the year 2002 that means we are missing data for the year 1999 since we start at the year 2000
-          Need to find a clever way around this so the data won't be messed up
+          Need to find a clever way around this so the data won't be messed up --> [SOLUTION] When scraping get a few years before target NFL year that way we see
+          full development of a player
         [X] Merge the two Dataframes together
 
     '''

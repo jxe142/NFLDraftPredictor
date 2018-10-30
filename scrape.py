@@ -275,7 +275,7 @@ def getData():
 
     if len(os.listdir(path0)) < 3:
         print("####### Scrapping College Data #######")
-        years = getYears(2000,2018) # Max range 1956 - 2018 Note add one extra year to end
+        years = getYears(1996,2018) # Max range 1956 - 2018 Note add one extra year to end
         dataTypes = ['Rushing', 'Passing', 'Receiving']
         RushingPlayersCollege, PassingPlayersCollege, ReceivingPlayersCollege =  ScrapeCollegeStats(years, dataTypes)
         writeCSV("./data/CollegeStatsData/RushingData.csv", RushingPlayersCollege)
