@@ -131,6 +131,6 @@ sc = SparkContext(conf=conf)
 spark = SparkSession.builder.appName("NflDraftApp").config("spark.some.config.option", "some-value").getOrCreate()
 #nflDF =  cleanDraftData("RB") # takes in either RB, QB, WR since these are the main postions we can analytics on 
                                # Note from 2000 - 2018 we have 371 RBs, 223 QBs, 585 WRs
-cleanCollegeData("RB")
+collegeDF = cleanCollegeData("RB")
 #combineDF = cleanCombineData("RB")
 print("############ " + str(NflDataFrame.count()))
