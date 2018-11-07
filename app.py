@@ -9,9 +9,10 @@ from pyspark import SparkConf, SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.functions import *
-from pyspark.sql.functions import col, udf, array
+from pyspark.sql.functions import col, udf, array, when
 from pyspark.sql.types import IntegerType, DoubleType
-from pyspark.ml.feature import Imputer
+from pyspark.ml.feature import Imputer, OneHotEncoderEstimator, StringIndexer, VectorAssembler
+from pyspark.ml import Pipeline
 
 
 #Takes in the path to a draft file and returns a cleander version as a DataFrame (or a RDD)
@@ -40,7 +41,7 @@ def cleanDraftData(postion):
     # Used to fill in Null values with the medium
     imputer = Imputer(inputCols=["Age"], outputCols=["Age"])   
     cleanData = imputer.setStrategy("median").fit(unCleanData).transform(unCleanData)
-    cleanData.show()
+    #cleanData.show()
     return cleanData
 
 def cleanCollegeData(postion):
@@ -84,7 +85,7 @@ def cleanCollegeData(postion):
         col("sum(Yds (rushing))").alias("Yds (rushing)"), col("Avg (rushing)"), col("sum(TD (rushing))").alias("TD (rushing)"), col("sum(Rec (receiving))").alias("Rec (receiving)"),
         col("sum(Yds (receiving))").alias("Yds (receiving)"), col("Avg (receiving)"), col("sum(TD (receiving))").alias("TD (receiving)"), col("sum(Plays (scrimmage))").alias("Plays (scrimmage)"),
         col("sum(Yds (scrimmage))").alias("Yds (scrimmage)"), col("Avg (scrimmage)"), col("sum(TD (scrimmage))").alias("TD (scrimmage)") )
-        unCleanDataGrouped.show()
+        #unCleanDataGrouped.show()
         
         # Get the players team and conference of their final year
         unCleanDataTeams = unCleanData.groupBy('Player','School').agg(F.max("Year").alias("Year"))
@@ -93,7 +94,7 @@ def cleanCollegeData(postion):
         df1 = unCleanDataGrouped.alias('df1')
         df2 = unCleanDataTeams.alias('df2')
         cleanData = df1.join(df2, (df1.Player == df2.Player) & (df1.School == df2.School)).select('df1.*','df2.Year')
-        cleanData.show()
+        #cleanData.show()
 
         return cleanData
 
@@ -118,20 +119,67 @@ def cleanCombineData(postion): # 2688 --> RB 509
 
     cleanData = unCleanData
     print(cleanData.count())
-    cleanData.show()
+    #cleanData.show()
     return cleanData
+
+def prepDataForML(df):
+    # https://towardsdatascience.com/machine-learning-with-pyspark-and-mllib-solving-a-binary-classification-problem-96396065d2aa
+    cols = df.columns
+
+    categoricalColumns = ['School']
+    stages = []
+    for categoricalCol in categoricalColumns:
+        # indexes each categorical column using the StringIndexer
+        stringIndexer = StringIndexer(inputCol = categoricalCol, outputCol = categoricalCol + 'Index')
+        #  converts the indexed categories into one-hot encoded variables
+        encoder = OneHotEncoderEstimator(inputCols=[stringIndexer.getOutputCol()], outputCols=[categoricalCol + "classVec"])
+        stages += [stringIndexer, encoder]
+    
+    # StringIndexer again to encode our labels to label indices
+    label_stringIdx = StringIndexer(inputCol = 'Drafted', outputCol = 'label')
+    stages += [label_stringIdx]
+
+    # VectorAssembler to combine all the feature columns into a single vector column
+    numericCols = ['Games Played', 'Att (rushing)', 'Yds (rushing)', 'Avg (rushing)', 'TD (rushing)', 'Rec (receiving)', 'Yds (receiving)',
+                    'Avg (receiving)', 'TD (receiving)', 'Plays (scrimmage)', 'Yds (scrimmage)', 'Avg (scrimmage)', 'TD (scrimmage)', 'Year']
+    assemblerInputs = [c + "classVec" for c in categoricalColumns] + numericCols
+    assembler = VectorAssembler(inputCols=assemblerInputs, outputCol="features")
+    stages += [assembler]
+    
+    # PipeLine for the ML data to follow
+    pipeline = Pipeline(stages = stages)
+    pipelineModel = pipeline.fit(df)
+    df = pipelineModel.transform(df)
+    selectedCols = ['label', 'features'] + cols
+    df = df.select(selectedCols)
+    df.printSchema()
+    df.show()
+
+    # Randomly split data into train and test sets, and set seed for reproducibility.
+    train, test = df.randomSplit([0.7, 0.3], seed = 2018)
+    # print("Training Dataset Count: " + str(train.count()))
+    # print("Test Dataset Count: " + str(test.count()))
+
+
 
 def main():
     getData()
 
 main()
 
+
 #Config
 conf = SparkConf()
 sc = SparkContext(conf=conf)
 spark = SparkSession.builder.appName("NflDraftApp").config("spark.some.config.option", "some-value").getOrCreate()
-#nflDF =  cleanDraftData("RB") # takes in either RB, QB, WR since these are the main postions we can analytics on 
-                               # Note from 2000 - 2018 we have 371 RBs, 223 QBs, 585 WRs
+nflDF =  cleanDraftData("RB") # takes in either RB, QB, WR since these are the main postions we can analytics on 
+                            # Note from 2000 - 2018 we have 371 RBs, 223 QBs, 585 WRs
 collegeDF = cleanCollegeData("RB")
 #combineDF = cleanCombineData("RB")
-print("############ " + str(NflDataFrame.count()))
+
+# Merged data from the NFL and College Data 1 if they got drafted 0 otherwise NOTE (Yes = 1, No = 0)
+draftedDataFrame = collegeDF.withColumn("Player", col("Player")).alias("College")\
+    .join(nflDF.withColumn("Player", col("Player Name")).alias("NFL"), on="Player", how="left")\
+    .select("College.*", when(col("NFL.Player Name").isNotNull(), "Yes").otherwise("No").alias("Drafted"))
+draftedDataFrame.printSchema()
+prepDataForML(draftedDataFrame)
