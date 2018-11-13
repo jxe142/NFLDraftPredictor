@@ -11,9 +11,17 @@ from pyspark.sql import functions as F
 from pyspark.sql.functions import *
 from pyspark.sql.functions import col, udf, array, when
 from pyspark.sql.types import IntegerType, DoubleType
-from pyspark.ml.feature import Imputer, OneHotEncoderEstimator, StringIndexer, VectorAssembler
 from pyspark.ml import Pipeline
+from pyspark.ml.feature import Imputer, OneHotEncoderEstimator, StringIndexer, VectorAssembler
+from pyspark.ml.classification import LogisticRegression
+from pyspark.ml.evaluation import BinaryClassificationEvaluator
 
+
+def ComputeAvg(x):
+    if x[1] == 0:
+        return 0
+    else:
+        return x[0]/ x[1]
 
 #Takes in the path to a draft file and returns a cleander version as a DataFrame (or a RDD)
 def cleanDraftData(postion):
@@ -75,10 +83,13 @@ def cleanCollegeData(postion):
                       'TD (receiving)', 'Plays (scrimmage)', 'Yds (scrimmage)','TD (scrimmage)')
 
         # Compute new Avgs
-        averageFunc = udf(lambda array: array[0]/array[1], DoubleType())
+        averageFunc = udf(lambda array: ComputeAvg(array), DoubleType())
+        # unCleanDataGrouped.show(1000)
+        # exit()
         unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (rushing)", averageFunc(array(unCleanDataGrouped['sum(Yds (rushing))'], unCleanDataGrouped['sum(Att (rushing))'])))
         unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (receiving)", averageFunc(array(unCleanDataGrouped['sum(Yds (receiving))'], unCleanDataGrouped['sum(Rec (receiving))'])))
         unCleanDataGrouped = unCleanDataGrouped.withColumn("Avg (scrimmage)", averageFunc(array(unCleanDataGrouped['sum(Yds (scrimmage))'], unCleanDataGrouped['sum(Plays (scrimmage))'])))
+        unCleanDataGrouped = unCleanDataGrouped.na.fill(0)
 
         # Rename cols 
         unCleanDataGrouped = unCleanDataGrouped.select( col("Player"), col("School"), col("sum(Games Played)").alias("Games Played"), col("sum(Att (rushing))").alias("Att (rushing)"),
@@ -152,15 +163,22 @@ def prepDataForML(df):
     df = pipelineModel.transform(df)
     selectedCols = ['label', 'features'] + cols
     df = df.select(selectedCols)
-    df.printSchema()
-    df.show()
+    #df.printSchema()
+    #df.show()
 
     # Randomly split data into train and test sets, and set seed for reproducibility.
     train, test = df.randomSplit([0.7, 0.3], seed = 2018)
+    train.cache()
+    test.cache()
     # print("Training Dataset Count: " + str(train.count()))
     # print("Test Dataset Count: " + str(test.count()))
 
-
+    # Apply machine learing to it 
+    lr = LogisticRegression(featuresCol = 'features', labelCol = 'label', maxIter=10)
+    lrModel = lr.fit(train)
+    predictions = lrModel.transform(test)
+    evaluator = BinaryClassificationEvaluator()
+    print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
 
 def main():
     getData()
@@ -181,5 +199,6 @@ collegeDF = cleanCollegeData("RB")
 draftedDataFrame = collegeDF.withColumn("Player", col("Player")).alias("College")\
     .join(nflDF.withColumn("Player", col("Player Name")).alias("NFL"), on="Player", how="left")\
     .select("College.*", when(col("NFL.Player Name").isNotNull(), "Yes").otherwise("No").alias("Drafted"))
-draftedDataFrame.printSchema()
+draftedDataFrame.cache()
+#draftedDataFrame.show(1000)
 prepDataForML(draftedDataFrame)
