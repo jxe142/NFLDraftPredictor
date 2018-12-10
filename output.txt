@@ -1,0 +1,190 @@
+2018-12-06 10:39:56 WARN  NativeCodeLoader:62 - Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+####### Scrapping College Data #######
+Getting College data for 1996:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 1997:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 1998:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 1999:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2000:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2001:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2002:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2003:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2004:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2005:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2006:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2007:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2008:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2009:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2010:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2011:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2012:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2013:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2014:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2015:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2016:
+ *Rushing
+ *Passing
+ *Receiving
+Getting College data for 2017:
+ *Rushing
+ *Passing
+ *Receiving
+Writting file ./data/CollegeStatsData/RushingData.csv
+Writting file ./data/CollegeStatsData/ReceivingData.csv
+Writting file ./data/CollegeStatsData/PassingData.csv
+####### Scrapping NFL Data #######
+Rnd,Pick,Team,Player Name,Pos,Age,To (year they play to),AP1,PB,ST,CarAV,DrAV,G,Cmp (passing),Att (passing),Yds (passing),Tds (passing),Int (passing),Att (rushing),Yds (rushing),TD (rushing),Rec (receiving),Yds (receiving),TD (receiving),Tkl (solo),Int,Sk,College,Draft Year
+Getting NFL data for 2000:
+Getting NFL data for 2001:
+Getting NFL data for 2002:
+Getting NFL data for 2003:
+Getting NFL data for 2004:
+Getting NFL data for 2005:
+Getting NFL data for 2006:
+Getting NFL data for 2007:
+Getting NFL data for 2008:
+Getting NFL data for 2009:
+Getting NFL data for 2010:
+Getting NFL data for 2011:
+Getting NFL data for 2012:
+Getting NFL data for 2013:
+Getting NFL data for 2014:
+Getting NFL data for 2015:
+Getting NFL data for 2016:
+Getting NFL data for 2017:
+Writting file ./data/NflDraftData/draftData.csv
+####### Scrapping Combine Data #######
+Getting Combine data for 2000:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2001:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2002:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2003:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2004:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2005:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2006:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2007:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2008:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2009:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2010:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2011:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2012:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2013:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2014:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2015:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2016:
+ *Offense
+ *Defense
+ *Special
+Getting Combine data for 2017:
+ *Offense
+ *Defense
+ *Special
+Writting file ./data/CombineData/OffensePlayersData.csv
+Writting file ./data/CombineData/DefensePlayersData.csv
+Writting file ./data/CombineData/SpecailPlayersData.csv

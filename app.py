@@ -23,7 +23,7 @@ def ComputeAvg(x):
     else:
         return x[0]/ x[1]
 
-#Takes in the path to a draft file and returns a cleander version as a DataFrame (or a RDD)
+# Takes in the path to a draft file and returns a cleander version as a DataFrame (or a RDD)
 def cleanDraftData(postion):
     '''
         [X] need to fill in nulls for the Age with the AVG, or with the median of all the ages  --> opted out for the medium 
@@ -105,8 +105,6 @@ def cleanCollegeData(postion):
         df1 = unCleanDataGrouped.alias('df1')
         df2 = unCleanDataTeams.alias('df2')
         cleanData = df1.join(df2, (df1.Player == df2.Player) & (df1.School == df2.School)).select('df1.*','df2.Year')
-        #cleanData.show()
-
         return cleanData
 
     elif(postion == "WR"):
@@ -209,6 +207,10 @@ def prepDataForML(df):
     # Decision Tree --> Area Under ROC: 83.31151832460733, Accuracy: 86.97183098591549%
     dt = DecisionTreeClassifier(labelCol="label", featuresCol="features")
     dtModel = dt.fit(train)
+
+    # Cross Vaildation 
+
+
     predictions = dtModel.transform(test)
     evaluator = BinaryClassificationEvaluator()
     print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
@@ -226,12 +228,7 @@ def prepDataForML(df):
     # accuracy = evaluator.evaluate(predictions)
     # print("Test set accuracy = " + str(accuracy))
 
-def main():
-    getData()
-
-main()
-
-
+#getData()
 #Config
 conf = SparkConf()
 sc = SparkContext(conf=conf)
