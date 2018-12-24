@@ -173,7 +173,8 @@ def prepDataForML(df):
     test.cache()
     return test,train
 
-# Logistic Regression --> ROC: 85%, Accuracy: 88.73239436619719%, Cross Vaildation Results 90.28642590286425% Runtime 48.7 mins
+# Logistic Regression --> ROC: 85%, Accuracy: 88.73239436619719%, Cross Vaildation Accuracy Results 90.28642590286425%
+# Precision = 93.02631578947368%, Recall = 96.58469945355191, Runtime 48.7 mins 
 # Default --> regParam=0.0, elasticNetParam=0.0
 def LogisticRegression(train,test):
     lr = LogisticRegression(featuresCol = 'features', labelCol = 'label', maxIter=10)
@@ -279,6 +280,6 @@ draftedDataFrame = collegeDF.withColumn("Player", col("Player")).alias("College"
 draftedDataFrame.cache()
 train, test = prepDataForML(draftedDataFrame)
 LogisticRegression(train,test)
-RandomForest(train,test)
-SVM(train,test)
-DecisionTree(train,test)
+# RandomForest(train,test)
+# SVM(train,test)
+# DecisionTree(train,test)
