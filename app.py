@@ -10,11 +10,14 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.functions import *
 from pyspark.sql.functions import col, udf, array, when
-from pyspark.sql.types import IntegerType, DoubleType
+from pyspark.sql.types import IntegerType, DoubleType, FloatType
 from pyspark.ml import Pipeline
 from pyspark.ml.feature import Imputer, OneHotEncoderEstimator, StringIndexer, VectorAssembler
 from pyspark.ml.evaluation import BinaryClassificationEvaluator, MulticlassClassificationEvaluator
+from pyspark.mllib.evaluation import MulticlassMetrics
 from pyspark.ml.classification import LogisticRegression, RandomForestClassifier, LinearSVC, DecisionTreeClassifier, NaiveBayes
+from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
+
 
 
 def ComputeAvg(x):
@@ -165,7 +168,7 @@ def prepDataForML(df):
     #df.show()
 
     # Randomly split data into train and test sets, and set seed for reproducibility.
-    train, test = df.randomSplit([0.7, 0.3], seed = 2018)
+    train, test = df.randomSplit([0.7, 0.3], seed = 4913701)
     train.cache()
     test.cache()
     # print("Training Dataset Count: " + str(train.count()))
@@ -173,15 +176,50 @@ def prepDataForML(df):
 
     # Apply machine learing to it 
 
-    # Logistic Regression --> ROC: 85%, Accuracy: 88.73239436619719%
-    # lr = LogisticRegression(featuresCol = 'features', labelCol = 'label', maxIter=10)
-    # lrModel = lr.fit(train)
-    # predictions = lrModel.transform(test)
-    # evaluator = BinaryClassificationEvaluator()
-    # print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
-    # evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
-    # accuracy = evaluator.evaluate(predictions)
-    # print("Test set accuracy = " + str(accuracy))
+    # Logistic Regression --> ROC: 85%, Accuracy: 88.73239436619719%, Cross Vaildation Results 90.28642590286425% Runtime 48.7 mins
+    # Default --> regParam=0.0, elasticNetParam=0.0
+    lr = LogisticRegression(featuresCol = 'features', labelCol = 'label', maxIter=10)
+        #lrModel = lr.fit(train)
+
+    # Make the evaluator
+    evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
+
+    # Cross Vaildation 
+    paramGrid = (ParamGridBuilder()
+             .addGrid(lr.regParam, [0.01, 0.5, 2.0])
+             .addGrid(lr.elasticNetParam, [0.0, 0.5, 1.0]) # b side of the y = mx + b
+             .addGrid(lr.maxIter, [1, 5, 10])
+             .build())
+
+    # Create 10-fold CrossValidator
+    cv = CrossValidator(estimator=lr, estimatorParamMaps=paramGrid, evaluator=evaluator, numFolds=10)
+
+    # Run cross validations this will take a while
+    cvModel = cv.fit(train)
+
+    # # Use test set to measure the accuracy of our model on new data
+    predictions = cvModel.transform(test)
+
+        # predictions = lrModel.transform(test)
+        # predictions.show()
+    predictionAndLabelsRDD = predictions.select("prediction", "label").rdd
+    predictionAndLabelsRDD = predictionAndLabelsRDD.map(lambda x: (float(x.prediction), x.label))
+
+
+    metrics = MulticlassMetrics(predictionAndLabelsRDD)
+    
+    #Get Accuracy 
+        #evaluator = BinaryClassificationEvaluator()
+        #accuracy = evaluator.evaluate(predictions)
+    print("Accuracy = %s" % metrics.accuracy)
+
+    
+    print("Precision = %s" % metrics.precision(0))
+    print("Recall = %s" % metrics.recall(0) )
+        # print("Test set accuracy = " + str(accuracy))
+    # print('Model Intercept: ', cvModel.bestModel.intercept) # Intercept location -1.9926489776271217 --> Changing this value could effect algorithm
+        # print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
+    exit()
 
     # Random Forest --> ROC: 83.90126725368875%, Accuracy: 90.02347417840375%
     # rf = RandomForestClassifier(labelCol="label", featuresCol="features", numTrees=10)
@@ -205,18 +243,14 @@ def prepDataForML(df):
     # print("Test set accuracy = " + str(accuracy))
 
     # Decision Tree --> Area Under ROC: 83.31151832460733, Accuracy: 86.97183098591549%
-    dt = DecisionTreeClassifier(labelCol="label", featuresCol="features")
-    dtModel = dt.fit(train)
-
-    # Cross Vaildation 
-
-
-    predictions = dtModel.transform(test)
-    evaluator = BinaryClassificationEvaluator()
-    print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
-    evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
-    accuracy = evaluator.evaluate(predictions)
-    print("Test set accuracy = " + str(accuracy))
+    # dt = DecisionTreeClassifier(labelCol="label", featuresCol="features")
+    # dtModel = dt.fit(train)
+    # predictions = dtModel.transform(test)
+    # evaluator = BinaryClassificationEvaluator()
+    # print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
+    # evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
+    # accuracy = evaluator.evaluate(predictions)
+    # print("Test set accuracy = " + str(accuracy))
     
     # Naive Bayes --> Does not work right now b/c we have some negative numbers in our data
     # nb = NaiveBayes(smoothing=1.0, modelType="multinomial")
