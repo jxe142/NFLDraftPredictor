@@ -171,13 +171,11 @@ def prepDataForML(df):
     train, test = df.randomSplit([0.7, 0.3], seed = 4913701)
     train.cache()
     test.cache()
-    # print("Training Dataset Count: " + str(train.count()))
-    # print("Test Dataset Count: " + str(test.count()))
+    return test,train
 
-    # Apply machine learing to it 
-
-    # Logistic Regression --> ROC: 85%, Accuracy: 88.73239436619719%, Cross Vaildation Results 90.28642590286425% Runtime 48.7 mins
-    # Default --> regParam=0.0, elasticNetParam=0.0
+# Logistic Regression --> ROC: 85%, Accuracy: 88.73239436619719%, Cross Vaildation Results 90.28642590286425% Runtime 48.7 mins
+# Default --> regParam=0.0, elasticNetParam=0.0
+def LogisticRegression(train,test):
     lr = LogisticRegression(featuresCol = 'features', labelCol = 'label', maxIter=10)
         #lrModel = lr.fit(train)
 
@@ -219,51 +217,53 @@ def prepDataForML(df):
         # print("Test set accuracy = " + str(accuracy))
     # print('Model Intercept: ', cvModel.bestModel.intercept) # Intercept location -1.9926489776271217 --> Changing this value could effect algorithm
         # print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
-    exit()
 
-    # Random Forest --> ROC: 83.90126725368875%, Accuracy: 90.02347417840375%
-    # rf = RandomForestClassifier(labelCol="label", featuresCol="features", numTrees=10)
-    # rfModel = rf.fit(train)
-    # predictions = rfModel.transform(test)
-    # # predictions.show(1000)
-    # evaluator = BinaryClassificationEvaluator()
-    # print("Test Area Under ROC: " + str(evaluator.evaluate(predictions, {evaluator.metricName: "areaUnderROC"})))
-    # evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
-    # accuracy = evaluator.evaluate(predictions)
-    # print("Test set accuracy = " + str(accuracy))
+# Random Forest --> ROC: 83.90126725368875%, Accuracy: 90.02347417840375%
+def RandomForest(train,test):
+    rf = RandomForestClassifier(labelCol="label", featuresCol="features", numTrees=10)
+    rfModel = rf.fit(train)
+    predictions = rfModel.transform(test)
+    evaluator = BinaryClassificationEvaluator()
+    print("Test Area Under ROC: " + str(evaluator.evaluate(predictions, {evaluator.metricName: "areaUnderROC"})))
+    evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
+    accuracy = evaluator.evaluate(predictions)
+    print("Test set accuracy = " + str(accuracy))
 
-    # Linear SVM --> ROC: 77.35899571632558, Accuracy: 89.67136150234741%
-    # lsvc = LinearSVC(maxIter=10, regParam=0.1)
-    # lsvcModel = lsvc.fit(train)
-    # predictions = lsvcModel.transform(test)
-    # evaluator = BinaryClassificationEvaluator()
-    # print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
-    # evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
-    # accuracy = evaluator.evaluate(predictions)
-    # print("Test set accuracy = " + str(accuracy))
+# Linear SVM --> ROC: 77.35899571632558, Accuracy: 89.67136150234741%
+def SVM(train,test):
+    lsvc = LinearSVC(maxIter=10, regParam=0.1)
+    lsvcModel = lsvc.fit(train)
+    predictions = lsvcModel.transform(test)
+    evaluator = BinaryClassificationEvaluator()
+    print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
+    evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
+    accuracy = evaluator.evaluate(predictions)
+    print("Test set accuracy = " + str(accuracy))
 
-    # Decision Tree --> Area Under ROC: 83.31151832460733, Accuracy: 86.97183098591549%
-    # dt = DecisionTreeClassifier(labelCol="label", featuresCol="features")
-    # dtModel = dt.fit(train)
-    # predictions = dtModel.transform(test)
-    # evaluator = BinaryClassificationEvaluator()
-    # print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
-    # evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
-    # accuracy = evaluator.evaluate(predictions)
-    # print("Test set accuracy = " + str(accuracy))
-    
-    # Naive Bayes --> Does not work right now b/c we have some negative numbers in our data
-    # nb = NaiveBayes(smoothing=1.0, modelType="multinomial")
-    # nbModle = nb.fit(train)
-    # predictions = nbModle.transform(test)
-    # evaluator = BinaryClassificationEvaluator()
-    # print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
-    # evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
-    # accuracy = evaluator.evaluate(predictions)
-    # print("Test set accuracy = " + str(accuracy))
+# Decision Tree --> Area Under ROC: 83.31151832460733, Accuracy: 86.97183098591549%
+def DecisionTree(train,test):
+    dt = DecisionTreeClassifier(labelCol="label", featuresCol="features")
+    dtModel = dt.fit(train)
+    predictions = dtModel.transform(test)
+    evaluator = BinaryClassificationEvaluator()
+    print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
+    evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
+    accuracy = evaluator.evaluate(predictions)
+    print("Test set accuracy = " + str(accuracy))
 
-#getData()
-#Config
+# Naive Bayes --> Does not work right now b/c we have some negative numbers in our data
+def NaiveBayesAlgo(train,test):
+    nb = NaiveBayes(smoothing=1.0, modelType="multinomial")
+    nbModle = nb.fit(train)
+    predictions = nbModle.transform(test)
+    evaluator = BinaryClassificationEvaluator()
+    print('Test Area Under ROC', evaluator.evaluate(predictions) * 100)
+    evaluator = MulticlassClassificationEvaluator(labelCol="label", predictionCol="prediction", metricName="accuracy")
+    accuracy = evaluator.evaluate(predictions)
+    print("Test set accuracy = " + str(accuracy))
+
+
+getData()
 conf = SparkConf()
 sc = SparkContext(conf=conf)
 spark = SparkSession.builder.appName("NflDraftApp").config("spark.some.config.option", "some-value").getOrCreate()
@@ -277,5 +277,8 @@ draftedDataFrame = collegeDF.withColumn("Player", col("Player")).alias("College"
     .join(nflDF.withColumn("Player", col("Player Name")).alias("NFL"), on="Player", how="left")\
     .select("College.*", when(col("NFL.Player Name").isNotNull(), "Yes").otherwise("No").alias("Drafted"))
 draftedDataFrame.cache()
-#draftedDataFrame.show(1000)
-prepDataForML(draftedDataFrame)
+train, test = prepDataForML(draftedDataFrame)
+LogisticRegression(train,test)
+RandomForest(train,test)
+SVM(train,test)
+DecisionTree(train,test)
